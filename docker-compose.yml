@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  api-1:
+    build:
+      context: .
+      dockerfile: apis/Dockerfile.dev
+    volumes:
+      - .:/app                        # include everything
+      - /app/apis                     # exclude all apis
+      - /app/webs                     # exclude all webs
+      - /app/mobiles                  # exclude all mobiles
+      - /app/node_modules             # exclude root node_modules so that it is not overwritten
+      - ./apis/api-1:/app/apis/api    # include api source
+    networks:
+      - webnet
+    ports:
+      - "3000:3000"
+    command: bash -c "npm install && nodemon -L --inspect apis/api/src/server.js"
+  api-2:
+    build:
+      context: .
+      dockerfile: apis/Dockerfile.dev
+    volumes:
+      - .:/app                        # include everything
+      - /app/apis                     # exclude all apis
+      - /app/webs                     # exclude all webs
+      - /app/mobiles                  # exclude all mobiles
+      - /app/node_modules             # exclude root node_modules so that it is not overwritten
+      - ./apis/api-2:/app/apis/api    # include package source
+    networks:
+      - webnet
+    ports:
+      - "3001:3000"
+    command: bash -c "npm install && nodemon -L --inspect apis/api/src/server.js"
+  #WEB - HMR DOESN'T WORK PROPERLY
+  #web-1:
+  #  build:
+  #    context: .
+  #    dockerfile: webs/Dockerfile.dev
+  #  volumes:
+  #    - .:/app                        # include everything
+  #    - /app/apis                     # exclude all apis
+  #    - /app/webs                     # exclude all webs
+  #    - /app/mobiles                  # exclude all mobiles
+  #    - /app/node_modules             # exclude root node_modules so that it is not overwritten
+  #    - ./webs/web-1:/app/webs/web    # include package source
+  #  networks:
+  #    - webnet
+  #  ports:
+  #    - 3002:3000
+  #    - 9026:9026
+  #  command: bash -c "npm install && cd webs/web && npm run start"
+  ingress:
+    image: nginx:1.23.3-alpine
+    depends_on:
+      - api-1
+      - api-2
+      - web-1
+    volumes:  
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+
+networks:
+  webnet:

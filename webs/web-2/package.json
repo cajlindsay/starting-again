@@ -1,0 +1,7 @@
+{
+  "name": "web-2",
+  "type": "module",
+  "scripts": {
+    "test": "echo 'no tests'"
+  }
+}
