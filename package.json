@@ -15,6 +15,8 @@
     "monitor:pm2": "pm2 monit"
   },
   "devDependencies": {
-    "pm2": "5.2.2"
+    "pm2": "5.2.2",
+    "stylelint": "14.16.1",
+    "stylelint-config-standard-scss": "6.1.0"
   }
 }

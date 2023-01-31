@@ -1,8 +1,10 @@
 #app {
-  color: purple;
+  color: #f2f2;
+
+  $something: green;
 
   .foo {
-    color: green;
+    color: $something;
     display: flex;
   }
 }
