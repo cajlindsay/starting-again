@@ -1,8 +1,9 @@
 global
-- js linting
+- DONE js linting
 - end to end snapshot testing
-- run all with docker compose
-- debugging with integrated debugger inside running docker container
+- DROPPED run all with docker compose
+- DONE run all with pm2 locally
+- DONE debugging with integrated debugger inside running docker container
 - run all on minikube or some sort of alternative
 
 infrastructure
@@ -14,11 +15,11 @@ build and release pipeline
 - run tests on kubernetes if necessary
 
 web
-- get react app working
+- DONE get react app working
 - call apis
-- scss and linting
+- DONE scss and linting
 - redux
 - visual snapshot testing
 
 apis
-- unit testing
+- DONE unit testing

@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('api-1 - ' + foo());
+  res.json({ foo: 'api-1 - ' + foo() });
 });
 
 app.use('/routes-1', routes1);
