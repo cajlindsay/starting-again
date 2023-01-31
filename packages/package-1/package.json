@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "test": "echo 'no tests'"
+    "test": "echo 'no tests'",
+    "lint:es": "eslint **/*.js",
+    "prettier": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --check .",
+    "prettier:fix": "npm run prettier -- --write"
   }
 }

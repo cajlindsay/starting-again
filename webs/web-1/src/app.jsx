@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./app.scss";
+import React, { useState } from 'react';
+import './app.scss';
 
 const { VITE_FOO, VITE_API_1 } = import.meta.env;
 
