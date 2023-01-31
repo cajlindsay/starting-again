@@ -31,7 +31,24 @@ module.exports = {
       watch: [
         'webs/web-1',
         'packages'
-      ]
+      ],
+      env: {
+        PORT: 5173
+      }
+    },
+    {
+      name: 'web-2',
+      script: 'npm',
+      args: 'start',
+      interpreter: 'none',
+      cwd: 'webs/web-2',
+      watch: [
+        'webs/web-2',
+        'packages'
+      ],
+      env: {
+        PORT: 5174
+      }
     }
   ]
 };

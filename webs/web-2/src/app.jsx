@@ -9,7 +9,7 @@ export default function App() {
   return (
     <div id="app">
       <div>
-        web 1
+        web 2
       </div>
       <div className="foo">
         {counter.toString()}

@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
@@ -10,9 +11,12 @@ export default defineConfig({
     }),
   ],
   envDir: 'config-env',
+  server: {
+    port: process.env.PORT
+  },
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './config-tests/vitest.setup.js'
+    setupFiles: path.join(__dirname, 'vitest.setup.js')
   }
 });
