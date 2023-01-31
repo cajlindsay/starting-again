@@ -16,7 +16,7 @@ build and release pipeline
 
 web
 - DONE get react app working
-- call apis
+- DONE call apis
 - DONE scss and linting
 - redux
 - visual snapshot testing
