@@ -2,10 +2,10 @@
   "name": "web-2",
   "type": "module",
   "scripts": {
-    "start": "vite --config ../vite.config.js",
-    "test": "vitest --config ../vite.config.js --coverage",
+    "start": "vite --config ../../vite.web.config.js",
+    "test": "vitest --config ../../vite.web.config.js --coverage",
     "lint:style": "stylelint **/*.scss",
-    "build": "vite build --config ../vite.config.js",
+    "build": "vite build --config ../../vite.web.config.js",
     "lint:es": "eslint **/*.js **/*.jsx",
     "prettier": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --check .",
     "prettier:fix": "npm run prettier -- --write"

@@ -2,7 +2,7 @@
   "name": "package-2",
   "type": "module",
   "scripts": {
-    "test": "echo 'no tests'",
+    "test": "vitest  --config ../../vite.non-web.config.js",
     "lint:es": "eslint **/*.js",
     "prettier": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --check .",
     "prettier:fix": "npm run prettier -- --write"

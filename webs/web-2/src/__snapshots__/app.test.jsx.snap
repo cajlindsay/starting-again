@@ -6,7 +6,10 @@ exports[`App > renders 1`] = `
     id="app"
   >
     <div>
-      web 2
+      web 2 
+      <div>
+        Foo
+      </div>
     </div>
     <div
       class="foo"
