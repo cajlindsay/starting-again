@@ -9,13 +9,21 @@ const apis = [
 ];
 
 export default defineConfig({
+  // global plugins
   plugins: [
+    // react app
     react(),
+
+    // polyfills for browser specific features/syntax (e.g. css prefixing)
     legacy({
       targets: ['defaults', 'not IE 11'],
     }),
   ],
-  envDir: 'config-env', // dir in web projects containing env variabless
+
+  // dir in web projects containing .env files
+  envDir: 'config-env',
+
+  // dev server config
   server: {
     // expose on PORT provided by pm2
     port: process.env.PORT,
@@ -34,7 +42,8 @@ export default defineConfig({
       {}
     ),
   },
-  // test specific configuration
+
+  // testing config
   test: {
     globals: true,
     environment: 'jsdom',
