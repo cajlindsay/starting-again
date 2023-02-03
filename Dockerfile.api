@@ -1,0 +1,43 @@
+# base image
+FROM node:19.4.0-alpine as build
+
+# args
+ARG app
+
+# create app directory
+RUN mkdir /app
+WORKDIR /app
+
+# add source files
+ADD . /app
+
+# install dependencies
+RUN npm install
+
+# env
+ENV PATH /app/node_modules/.bin:$PATH
+
+# switch to api directory
+WORKDIR /app/apis/${app}
+
+# build the api
+RUN esbuild src/server.js --platform=node --bundle --minify --outfile=dist/index.js
+
+# runtime image
+FROM node:19.4.0-alpine
+
+# args
+ARG app
+
+# create app directory
+RUN mkdir /app
+WORKDIR /app
+
+# copy build files
+COPY --from=build /app/apis/${app}/dist .
+
+# expose port
+EXPOSE 3000:3000
+
+# run the server when the container starts
+CMD node index.js
