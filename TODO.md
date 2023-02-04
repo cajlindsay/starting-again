@@ -4,7 +4,7 @@ global
 - DROPPED run all with docker compose
 - DONE run all with pm2 locally
 - DONE debugging with integrated debugger inside running docker container
-- run all on minikube or some sort of alternative
+- DONE run all on minikube or some sort of alternative
 
 infrastructure
 - run feature, uat and prod environmentss on kubernetes
