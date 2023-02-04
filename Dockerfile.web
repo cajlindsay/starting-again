@@ -3,6 +3,7 @@ FROM node:19.4.0-alpine as build
 
 # args
 ARG app
+ARG mode
 
 # create app directory
 RUN mkdir /app
@@ -21,7 +22,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 WORKDIR /app/webs/${app}
 
 # build
-RUN vite build --config ../../vite.web.config.js
+#RUN cp config-env/.env.k8slocal config/env/.env.production
+RUN vite build --config ../../vite.web.config.js --mode ${mode}
 
 # runtime image
 FROM nginx:1.23.3-alpine

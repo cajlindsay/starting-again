@@ -20,6 +20,7 @@ web
 - DONE scss and linting
 - redux
 - visual snapshot testing
+- authentication
 
 apis
 - DONE unit testing
