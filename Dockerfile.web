@@ -18,26 +18,16 @@ RUN npm install
 ENV PATH /app/node_modules/.bin:$PATH
 
 # switch to source directory
-WORKDIR /app/apis/${app}
+WORKDIR /app/webs/${app}
 
 # build
-RUN esbuild src/server.js --platform=node --bundle --minify --outfile=dist/index.js
+RUN vite build --config ../../vite.web.config.js
 
 # runtime image
-FROM node:19.4.0-alpine
+FROM nginx:1.23.3-alpine
 
 # args
 ARG app
 
-# create app directory
-RUN mkdir /app
-WORKDIR /app
-
 # copy build files
-COPY --from=build /app/apis/${app}/dist .
-
-# expose port
-EXPOSE 3000:3000
-
-# run the server when the container starts
-CMD node index.js
+COPY --from=build /app/webs/${app}/dist /usr/share/nginx/html

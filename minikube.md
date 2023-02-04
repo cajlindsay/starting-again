@@ -1,3 +1,5 @@
+NOTE: NOT WORKING.....CAN'T GET INGRESS TO WORK
+
 Start minikube
 
 ```
@@ -39,22 +41,4 @@ This differs slightly from the docker build syntax, which is
 
 ```
 docker build -f Dockerfile.api --build-arg app=api-1 -t api-1 .
-```
-
-Port forward to a running deployment
-
-```
- kubectl port-forward deployment/api-1 3000:3000
-```
-
-Deploy a config file
-
-```
-kubectl apply -f k8s.yml
-```
-
-Set the default namespace
-
-```
-kubectl config set-context --current --namespace=starting-again
 ```

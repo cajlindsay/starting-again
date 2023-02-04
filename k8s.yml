@@ -10,6 +10,8 @@ metadata:
   namespace: starting-again
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
 spec:
   rules:
   - http:
@@ -28,13 +30,13 @@ spec:
             name: api-2
             port:
               number: 3000
-      - path: /
+      - path: /?(.*) # solves content-type rewrite issue with non-html files
         pathType: Prefix
         backend:
           service:
-            name: api-2
+            name: web-1
             port:
-              number: 3000      
+              number: 80      
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -109,3 +111,40 @@ spec:
   - protocol: TCP
     port: 3000
     targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-1
+  namespace: starting-again
+  labels:
+    app: web-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-1
+  template: 
+    metadata: 
+      labels:
+        app: web-1
+    spec:
+      containers:
+      - name: web-1
+        image: web-1:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-1
+  namespace: starting-again
+spec:
+  selector:
+    app: web-1
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
