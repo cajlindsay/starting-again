@@ -8,6 +8,7 @@
     "build": "vite build --config ../../vite.web.config.js",
     "lint:es": "eslint **/*.js **/*.jsx",
     "prettier": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --check .",
-    "prettier:fix": "npm run prettier -- --write"
+    "prettier:fix": "npm run prettier -- --write",
+    "test:visual": "playwright test --config ../../playwright.config.js"
   }
 }

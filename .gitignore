@@ -13,3 +13,6 @@ coverage
 # Documentation here: https://yarnpkg.com/features/zero-installs
 !.yarn/cache
 #.pnp.*
+/test-results/
+/playwright-report/
+/playwright/.cache/
