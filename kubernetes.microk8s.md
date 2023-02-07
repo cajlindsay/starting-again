@@ -21,6 +21,12 @@ wsl
 
 # Useful stuff
 
+Start microk8s:
+
+```
+sudo microk8s start
+```
+
 To make it easier to use kubectl:
 
 ```
@@ -70,7 +76,8 @@ Note that deployments will not automatically use the new image....you will need 
 
 # Routing to match ingress configuration in k8s.yml
 
-Add these lines to the /etc/hosts file. This will match the k8x.yml ingress configuration.
+Add these lines to the /etc/hosts file. This will match the k8x.yml ingress configuration. Sometimes this resets
+when your computer restarts so you may need to add these back if you cannot curl these URLs.
 
 ```
 127.0.0.1    web-1.starting-again.info
@@ -87,9 +94,11 @@ sudo apt install net-tools
 ifconfig
 ```
 
-This will print all of the wsl network interfaces. Look for and try in your windows browser all of the ip addresses starting with '192.168...'. (mine was http://192.168.154.68).
+This will print all of the wsl network interfaces. Look for and try in your windows browser all of the ip addresses
+starting with '192.168...' or ' 172.....'. It can change so you may need to do this sometimes when you restart.
 
-When you have identified the correct ip address, update your WINDOWS HOST FILE (C:/windows/System32/drivers/etc/hosts) with these lines:
+When you have identified the correct ip address, update your WINDOWS HOST FILE (C:/windows/System32/drivers/etc/hosts)
+with these lines:
 
 ```
 192.168.154.68    web-1.starting-again.info

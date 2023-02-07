@@ -13,6 +13,11 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
 spec:
+  defaultBackend:
+    service:
+      name: api-1
+      port:
+        number: 3000
   rules:
   - host: api.starting-again.info 
     http:
