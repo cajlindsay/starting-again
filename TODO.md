@@ -7,7 +7,7 @@ global
 - DONE run all on minikube or some sort of alternative
 
 infrastructure
-- run feature, uat and prod environmentss on kubernetes
+- run feature, uat and prod environments on kubernetes
 
 build and release pipeline
 - feature branch build and deployment
@@ -19,7 +19,7 @@ web
 - DONE call apis
 - DONE scss and linting
 - redux
-- visual snapshot testing
+- DONE visual snapshot testing
 - authentication
 
 apis
