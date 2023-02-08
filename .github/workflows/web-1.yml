@@ -13,14 +13,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: list files
-      run: ls
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4.0.0
-      with:
-        file: Dockerfile.web
-        tags: web-1/latest
-        build-args: |
-          app=web1
-          mode=k8slocal
-        
+    - name: docker build
+      run: docker build -f Dockerfile.web --build-arg app=web-1 --build-arg mode=k8slocal -t web-1 .        
