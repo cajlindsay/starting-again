@@ -22,7 +22,6 @@ ENV PATH /app/node_modules/.bin:$PATH
 WORKDIR /app/webs/${app}
 
 # build
-#RUN cp config-env/.env.k8slocal config/env/.env.production
 RUN vite build --config ../../vite.web.config.js --mode ${mode}
 
 # runtime image

@@ -2,3 +2,6 @@ dist
 node_modules
 bin
 coverage
+test-results
+playwright-report
+playwright/.cache
