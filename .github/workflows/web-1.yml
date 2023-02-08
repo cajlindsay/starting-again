@@ -1,0 +1,22 @@
+name: web 1
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4.0.0
+      with:
+        build-args: |
+          app=web1
+          mode=k8slocal
+        context: Dockerfile.web
