@@ -32,5 +32,5 @@ jobs:
     - run: npm run pw -- install-deps
     - run: npm run test:visual
       working-directory: ./webs/web-1
-    - name: npm run build -- --mode k8slocal
+    - run: npm run build -- --mode k8slocal
       working-directory: ./webs/web-1
