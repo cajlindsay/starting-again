@@ -1,0 +1,8 @@
+FROM ubuntu:22.10
+RUN apt update
+RUN apt install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_19.x | bash - \
+    && apt-get install -y nodejs
+RUN npm -v
+RUN node -v
+CMD ["tail", "-f", "/dev/null"]

@@ -1,0 +1,39 @@
+FROM foo as build
+
+# args
+ARG app
+ARG mode
+
+# create app directory
+RUN mkdir /app
+WORKDIR /app
+
+# add source files
+ADD . /app
+
+# install dependencies
+RUN npm install
+
+# env
+ENV PATH /app/node_modules/.bin:$PATH
+
+#lint
+WORKDIR /app/webs/${app}
+RUN npm run lint:es
+RUN npm run prettier
+RUN npm run lint:style
+
+# test
+RUN npm run test:visual -- --max-failures 1
+
+# build
+RUN vite build --config ../../vite.web.config.js --mode ${mode}
+
+# runtime image
+FROM nginx:1.23.3-alpine
+
+# args
+ARG app
+
+# copy build files
+COPY --from=build /app/webs/${app}/dist /usr/share/nginx/html

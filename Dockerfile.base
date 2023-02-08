@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/playwright:jammy
+RUN curl -sL https://deb.nodesource.com/setup_19.x | bash - \
+    && apt-get install -y nodejs
+
+RUN npx playwright install chrome
+RUN npx playwright install-deps
