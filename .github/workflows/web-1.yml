@@ -28,8 +28,7 @@ jobs:
       working-directory: ./webs/web-1
     - run: npm run lint:style
       working-directory: ./webs/web-1
-    - run: npm run pw -- install chrome
-    - run: npm run pw -- install-deps
+    - run: npm run pw -- install-deps chrome
     - run: npm run test:visual
       working-directory: ./webs/web-1
     - run: npm run build -- --mode k8slocal
