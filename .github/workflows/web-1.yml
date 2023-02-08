@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: list files
+      run: ls
     - name: Build and push Docker image
       uses: docker/build-push-action@v4.0.0
       with:
