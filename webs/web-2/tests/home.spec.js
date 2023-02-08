@@ -7,9 +7,9 @@ test('matches snapshot', async ({ page }) => {
 });
 
 test('click api 1', async ({ page }) => {
-  await page.route('./api-1', async route => {
+  await page.route('./api-1', async (route) => {
     const json = {
-      message: 'this is the mock result from calling api-1'
+      message: 'this is the mock result from calling api-1',
     };
     await route.fulfill({ json });
   });
@@ -20,9 +20,9 @@ test('click api 1', async ({ page }) => {
 });
 
 test('click api 2', async ({ page }) => {
-  await page.route('./api-2', async route => {
+  await page.route('./api-2', async (route) => {
     const json = {
-      message: 'this is the mock result from calling api-2'
+      message: 'this is the mock result from calling api-2',
     };
     await route.fulfill({ json });
   });

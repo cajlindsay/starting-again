@@ -22,7 +22,7 @@ export default defineConfig({
   // opt out of parallel tests on CI
   workers: process.env.CI ? 1 : undefined,
   // reporter to use
-  reporter: 'html',
+  reporter: [['html', { open: 'never' }]],
   use: {
     // collect trace when retrying the failed test
     trace: 'on-first-retry',
