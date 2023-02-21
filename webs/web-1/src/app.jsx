@@ -1,20 +1,21 @@
-import axios from 'axios';
 import React, { useCallback, useState } from 'react';
+import apiClient from './api-client.js';
+
 import './app.scss';
 
-const { VITE_FOO, VITE_API_URL } = import.meta.env;
+const { VITE_FOO } = import.meta.env;
 
 export default function App() {
   const [counter] = useState(1);
   const [data, setData] = useState();
 
   const onCallAPI1 = useCallback(async () => {
-    const response = await axios.get(`${VITE_API_URL}/api-1`);
+    const response = await apiClient.get('/api-1');
     setData(response.data);
   }, []);
 
   const onCallAPI2 = useCallback(async () => {
-    const response = await axios.get(`${VITE_API_URL}/api-2`);
+    const response = await apiClient.get('/api-2');
     setData(response.data);
   }, []);
 
@@ -26,7 +27,7 @@ export default function App() {
       <div>
         <button onClick={onCallAPI1}>API 1</button>
         <button onClick={onCallAPI2}>API 2</button>
-        {data && <pre>{JSON.stringify(data)}</pre>}
+        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
       </div>
     </div>
   );

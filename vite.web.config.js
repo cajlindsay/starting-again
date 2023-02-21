@@ -5,7 +5,7 @@ import legacy from '@vitejs/plugin-legacy';
 
 const apis = [
   ['api-1', 3000],
-  ['api-2', 3001],
+  ['api-2', 3001]
 ];
 
 export default defineConfig({
@@ -16,8 +16,8 @@ export default defineConfig({
 
     // polyfills for browser specific features/syntax (e.g. css prefixing)
     legacy({
-      targets: ['defaults', 'not IE 11'],
-    }),
+      targets: ['defaults', 'not IE 11']
+    })
   ],
 
   // dir in web projects containing .env files
@@ -36,17 +36,28 @@ export default defineConfig({
           target: `http://localhost:${next[1]}`,
           changeOrigin: true,
           secure: false,
-          rewrite: (path) => path.replace(`/${next[0]}`, ''),
-        },
+          rewrite: (path) => path.replace(`/${next[0]}`, '')
+        }
       }),
       {}
-    ),
+    )
   },
+
+  // mock some modules when running the dev server for visual tests
+  ...(process.env.APP_ENV === 'visual_test'
+    ? {
+        resolve: {
+          alias: {
+            './auth.js': './auth-mock.js'
+          }
+        }
+      }
+    : {}),
 
   // testing config
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: path.join(__dirname, 'vitest.setup.js'),
-  },
+    setupFiles: path.join(__dirname, 'vitest.setup.js')
+  }
 });

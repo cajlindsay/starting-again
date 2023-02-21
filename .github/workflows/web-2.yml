@@ -13,6 +13,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 19.4.0
+    - run: npm install
+    - run: npm run lint:es
       working-directory: ./webs/web-2
-    - name: docker build
-      run: docker build -f Dockerfile.web --build-arg app=web-2 --build-arg mode=k8slocal -t web-2 .        
+    - run: npm run prettier
+      working-directory: ./webs/web-2
+    - run: npm run lint:style
+      working-directory: ./webs/web-2
+    - run: npm run pw -- install-deps chrome
+    - run: npm run test:visual
+      working-directory: ./webs/web-2
+    - run: npm run build -- --mode k8slocal
+      working-directory: ./webs/web-2
