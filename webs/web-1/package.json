@@ -1,5 +1,5 @@
 {
-  "name": "web-1",
+  "name": "@starting-again/web-1",
   "type": "module",
   "scripts": {
     "start": "vite --config ../../vite.web.config.js",

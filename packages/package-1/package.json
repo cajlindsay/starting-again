@@ -1,5 +1,5 @@
 {
-  "name": "package-1",
+  "name": "@starting-again/package-1",
   "version": "1.0.0",
   "type": "module",
   "scripts": {

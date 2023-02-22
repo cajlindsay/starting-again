@@ -1,5 +1,5 @@
 import express from 'express';
-import foo from 'package-1/src/module-1.js';
+import foo from '@starting-again/package-1/src/module-1.js';
 import routes1 from './routes-1.js';
 
 const PORT = process.env.PORT || 3000;

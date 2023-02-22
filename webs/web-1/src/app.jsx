@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import apiClient from './api-client.js';
+import apiClient from '@starting-again/web-common/src/api-client.js';
 
 import './app.scss';
 

@@ -4,7 +4,8 @@
   "workspaces": [
     "apis/*",
     "packages/*",
-    "webs/*"
+    "webs/*",
+    "web-packages/*"
   ],
   "scripts": {
     "start:docker": "docker-compose up --build --force-recreate -V",

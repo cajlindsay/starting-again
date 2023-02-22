@@ -24,7 +24,16 @@ export default defineConfig({
   // opt out of parallel tests on CI
   workers: process.env.CI ? 1 : undefined,
   // reporter to use
-  reporter: [['html', { open: 'never' }]],
+  reporter: [
+    [
+      'html', 
+      { 
+        open: 'never',
+        // drop report output to .playwright-report subfolder in project being tested
+        outputFolder: path.join(process.cwd(), '.playwright-report')
+      }
+    ]
+  ],
   use: {
     // collect trace when retrying the failed test
     trace: 'on-first-retry',

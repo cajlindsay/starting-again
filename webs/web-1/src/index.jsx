@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { init } from './auth.js';
+import { init } from '@starting-again/web-common/src/auth.js';
 import App from './app.jsx';
 
 init();

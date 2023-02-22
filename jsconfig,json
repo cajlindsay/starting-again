@@ -3,12 +3,7 @@
     "target": "esnext",
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "~/*": [
-        "./src/*"
-      ]
-    }
+    "baseUrl": "."
   },
   "exclude": [
     "node_modules",

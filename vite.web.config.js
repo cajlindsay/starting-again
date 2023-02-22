@@ -43,16 +43,17 @@ export default defineConfig({
     )
   },
 
-  // mock some modules when running the dev server for visual tests
-  ...(process.env.APP_ENV === 'visual_test'
-    ? {
-        resolve: {
-          alias: {
-            './auth.js': './auth-mock.js'
-          }
-        }
-      }
-    : {}),
+  resolve: {
+    alias: [
+      // mock some modules when running the dev server for visual tests
+      ...(process.env.APP_ENV === 'visual_test'
+        ? [
+          // mock the auth.js module
+          { find: /^.*\/web-common\/src\/auth.js/, replacement: '@starting-again/web-common/src/auth-mock.js' }
+        ]
+        : [])
+    ]
+  },
 
   // testing config
   test: {

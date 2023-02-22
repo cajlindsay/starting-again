@@ -1,5 +1,5 @@
 {
-  "name": "api-2",
+  "name": "@starting-again/api-2",
   "type": "module",
   "scripts": {
     "start": "nodemon src/server.js --watch src",
