@@ -1,9 +1,11 @@
 import * as msal from '@azure/msal-browser';
 
+const { VITE_MSAL_CLIENT_ID, VITE_MSAL_AUTHORITY } = import.meta.env;
+
 const msalInstance = new msal.PublicClientApplication({
   auth: {
-    clientId: 'ef0f1a58-5d27-48f4-a47d-043df4ea4c3f',
-    authority: 'https://login.microsoftonline.com/consumers'
+    clientId: VITE_MSAL_CLIENT_ID,
+    authority: VITE_MSAL_AUTHORITY
   }
 });
 
@@ -14,7 +16,7 @@ export async function init() {
 
 export async function getBearerToken() {
   const account = msalInstance.getAllAccounts()[0];
-
+  
   if (!account) {
     await msalInstance.loginRedirect();
     return;
@@ -36,4 +38,8 @@ export async function getBearerToken() {
 
     throw error;
   }
+}
+
+export function logOut() {
+  msalInstance.logoutRedirect();
 }

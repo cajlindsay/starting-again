@@ -13,7 +13,8 @@ var strategy = new BearerStrategy(
     validateIssuer: true,
     loggingLevel: 'info',
     passReqToCallback: false,
-    identityMetadata: 'https://login.microsoftonline.com/consumers/v2.0/.well-known/openid-configuration'
+    identityMetadata: 'https://login.microsoftonline.com/consumers/v2.0/.well-known/openid-configuration',
+    // loggingNoPII: false // uncomment this line to get better log output
   },
   (token, done) => {
     console.log(token);

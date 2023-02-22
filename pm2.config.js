@@ -28,10 +28,6 @@ module.exports = {
       args: 'start',
       interpreter: 'none',
       cwd: 'webs/web-1',
-      watch: [
-        'webs/web-1',
-        'packages'
-      ],
       env: {
         PORT: 5173
       }
@@ -42,10 +38,6 @@ module.exports = {
       args: 'start',
       interpreter: 'none',
       cwd: 'webs/web-2',
-      watch: [
-        'webs/web-2',
-        'packages'
-      ],
       env: {
         PORT: 5174
       }

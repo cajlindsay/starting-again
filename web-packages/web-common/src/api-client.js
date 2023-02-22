@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getBearerToken } from './auth.js';
+import { getBearerToken, logOut } from './auth.js';
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -18,6 +18,7 @@ api.defaults.headers['Content-Type'] = 'application/json';
 
 api.interceptors.request.use(
   async (config) => {
+    // get bearer token from storage and attach to authorization header
     const bearerToken = await getBearerToken();
     config.headers['Authorization'] = `Bearer ${bearerToken}`;
     return config;
@@ -27,15 +28,38 @@ api.interceptors.request.use(
   }
 );
 
-export default api;
-
-/* 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // successful response....reset 401 count
+    set401Count(0);
+    return response;
+  },
   (error) => {
-    if (error.response?.status === status) {
-      callback(error);
+    // reject non-401 errors
+    if (error.response?.status !== 401) {
+      set401Count(0);
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
+
+    // prevent infinite loop if auth server is failing
+    const count401 = get401Count();
+
+    if (count401 > 2) {
+      return Promise.reject(error);    
+    }
+
+    // increment 401 count and log out
+    set401Count(count401 + 1);
+    logOut();
   }
-); */
+);
+
+function set401Count(c) {
+  localStorage.setItem('COUNT_401', c);
+}
+
+function get401Count() {
+  return parseInt(localStorage.getItem('COUNT_401') || 0);
+}
+
+export default api;

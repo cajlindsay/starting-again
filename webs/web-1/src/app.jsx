@@ -3,10 +3,7 @@ import apiClient from '@starting-again/web-common/src/api-client.js';
 
 import './app.scss';
 
-const { VITE_FOO } = import.meta.env;
-
 export default function App() {
-  const [counter] = useState(1);
   const [data, setData] = useState();
 
   const onCallAPI1 = useCallback(async () => {
@@ -22,8 +19,6 @@ export default function App() {
   return (
     <div id="app">
       <div>web 1</div>
-      <div className="foo">{counter.toString()}</div>
-      <div>{VITE_FOO}</div>
       <div>
         <button onClick={onCallAPI1}>API 1</button>
         <button onClick={onCallAPI2}>API 2</button>
