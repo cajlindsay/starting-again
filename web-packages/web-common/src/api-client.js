@@ -45,7 +45,7 @@ api.interceptors.response.use(
     const count401 = get401Count();
 
     if (count401 > 2) {
-      return Promise.reject(error);    
+      return Promise.reject(error);
     }
 
     // increment 401 count and log out

@@ -9,6 +9,9 @@ const apis = [
 ];
 
 export default defineConfig({
+  // web app so appType should be 'spa' to include html middlewares
+  appType: 'spa',
+
   // global plugins
   plugins: [
     // react app
@@ -20,7 +23,7 @@ export default defineConfig({
     })
   ],
 
-  // dir in web projects containing .env files
+  // subfolder in project containing .env files
   envDir: 'config-env',
 
   // dev server config

@@ -16,14 +16,14 @@ export async function init() {
 
 export async function getBearerToken() {
   const account = msalInstance.getAllAccounts()[0];
-  
+
   if (!account) {
     await msalInstance.loginRedirect();
     return;
   }
 
   const accessTokenRequest = {
-    scopes: ['openid', 'profile'],
+    // scopes: ['openid', 'profile'],
     account: account
   };
 
@@ -34,6 +34,7 @@ export async function getBearerToken() {
   } catch (error) {
     if (error instanceof msal.InteractionRequiredAuthError) {
       msalInstance.acquireTokenRedirect(accessTokenRequest);
+      return;
     }
 
     throw error;

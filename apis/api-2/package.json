@@ -2,7 +2,7 @@
   "name": "@starting-again/api-2",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/server.js --watch src",
+    "start": "vite --config ../../vite.non-web.config.js",
     "test": "vitest  --config ../../vite.non-web.config.js --coverage",
     "lint:es": "eslint **/*.js",
     "prettier": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --check .",

@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react';
+
+import { logOut } from '@starting-again/web-common/src/auth';
 import apiClient from '@starting-again/web-common/src/api-client.js';
 
 import './app.scss';
@@ -22,6 +24,7 @@ export default function App() {
       <div>
         <button onClick={onCallAPI1}>API 1</button>
         <button onClick={onCallAPI2}>API 2</button>
+        <button onClick={logOut}>Sign out</button>
         {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
       </div>
     </div>
