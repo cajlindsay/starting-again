@@ -2,10 +2,13 @@ import jwt from 'jsonwebtoken';
 import jwksClient from 'jwks-rsa';
 import axios from 'axios';
 
-const TENANT_URL = 'https://login.microsoftonline.com/consumers';
-const CLIENT_ID = 'ef0f1a58-5d27-48f4-a47d-043df4ea4c3f';
-const DISCOVERY_KEYS_ENDPOINT = `${TENANT_URL}/discovery/v2.0/keys`;
-const configPromise = axios.get(`${TENANT_URL}/v2.0/.well-known/openid-configuration`);
+const { 
+  VITE_MSAL_TENANT_URL, 
+  VITE_MSAL_CLIENT_ID
+} = process.env;
+
+const DISCOVERY_KEYS_ENDPOINT = `${VITE_MSAL_TENANT_URL}/discovery/v2.0/keys`;
+const configPromise = axios.get(`${VITE_MSAL_TENANT_URL}/v2.0/.well-known/openid-configuration`);
 
 export default function validateJwt(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -18,7 +21,7 @@ export default function validateJwt(req, res, next) {
 
   return configPromise.then((config) => {
     const validationOptions = {
-      audience: CLIENT_ID,
+      audience: VITE_MSAL_CLIENT_ID,
       issuer: config.issuer
     };
 

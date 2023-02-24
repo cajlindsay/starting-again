@@ -2,14 +2,11 @@
   "name": "@starting-again/api-1",
   "type": "module",
   "scripts": {
-    "start": "PORT=3000 vite --config ../../vite.non-web.config.js",
-    "test": "vitest  --config ../../vite.non-web.config.js --coverage",
+    "start": "vite --config ../../vite.non-web.config.js",
+    "test": "vitest --config ../../vite.non-web.config.js --coverage",
+    "build": "vite build --config ../../vite.non-web.config.js",
     "lint:es": "eslint **/*.js",
     "prettier": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --check .",
     "prettier:fix": "npm run prettier -- --write"
-  },
-  "dependencies": {
-    "express": "4.18.2",
-    "package-1": "*"
   }
 }

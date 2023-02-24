@@ -13,12 +13,12 @@ app.get('/', (req, res) => {
 
 app.use('/routes-1', routes1);
 
-if (import.meta.env.PROD) {
+//if (import.meta.env.PROD) {
   const PORT = process.env.PORT || 3000;
 
   app.listen(PORT, () => {
     console.log('api-2 listening on port ' + PORT);
   });
-}
+//}
 
 export const viteNodeApp = app;

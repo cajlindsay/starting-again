@@ -1,15 +1,22 @@
 import { BearerStrategy } from 'passport-azure-ad';
 import passport from 'passport';
 
-const TENANT_URL = 'https://login.microsoftonline.com/consumers';
-const CLIENT_ID = 'ef0f1a58-5d27-48f4-a47d-043df4ea4c3f';
-const CLIENT_SECRET = 'HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp';
+const { 
+  MSAL_TENANT_URL, 
+  MSAL_CLIENT_ID, 
+  MSAL_CLIENT_SECRET 
+} = process.env;
+
+console.log('*************');
+console.log(MSAL_CLIENT_ID);
+console.log(MSAL_CLIENT_SECRET);
+console.log('***********');
 
 const strategy = new BearerStrategy(
   {
-    clientID: CLIENT_ID,
-    clientSecret: CLIENT_SECRET,
-    identityMetadata: `${TENANT_URL}/v2.0/.well-known/openid-configuration`,
+    clientID: MSAL_CLIENT_ID,
+    clientSecret: MSAL_CLIENT_SECRET,
+    identityMetadata: `${MSAL_TENANT_URL}/v2.0/.well-known/openid-configuration`,
     validateIssuer: false,
     loggingLevel: 'info',
     passReqToCallback: false
@@ -17,7 +24,6 @@ const strategy = new BearerStrategy(
     //loggingNoPII: false // uncomment this line to get better log output
   },
   (token, done) => {
-    console.log(token);
     done(null, {}, token);
   }
 );
