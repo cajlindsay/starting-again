@@ -1,16 +1,7 @@
 import { BearerStrategy } from 'passport-azure-ad';
 import passport from 'passport';
 
-const { 
-  MSAL_TENANT_URL, 
-  MSAL_CLIENT_ID, 
-  MSAL_CLIENT_SECRET 
-} = process.env;
-
-console.log('*************');
-console.log(MSAL_CLIENT_ID);
-console.log(MSAL_CLIENT_SECRET);
-console.log('***********');
+const { MSAL_TENANT_URL, MSAL_CLIENT_ID, MSAL_CLIENT_SECRET } = process.env;
 
 const strategy = new BearerStrategy(
   {
