@@ -23,8 +23,8 @@ jobs:
       working-directory: ./webs/web-2
     - run: npm run lint:style
       working-directory: ./webs/web-2
-    - run: npm run pw -- install-deps chrome
+    - run: npx playwright -- install-deps chrome
     - run: npm run test:visual
       working-directory: ./webs/web-2
-    - run: npm run build -- --mode k8slocal
+    - run: npx vite build --config ../../_config-vite/vite.web.config.js- --mode k8slocal
       working-directory: ./webs/web-2

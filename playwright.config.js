@@ -56,7 +56,7 @@ export default defineConfig({
   // run local dev server before starting the tests
   webServer: {
     // start the web server
-    command: 'vite --config ../../vite.web.config.js',
+    command: 'vite --config ../../_config-vite/vite.web.config.js',
     url: baseURL,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,

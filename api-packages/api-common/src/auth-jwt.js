@@ -3,12 +3,12 @@ import jwksClient from 'jwks-rsa';
 import axios from 'axios';
 
 const { 
-  VITE_MSAL_TENANT_URL, 
-  VITE_MSAL_CLIENT_ID
+  MSAL_TENANT_URL, 
+  MSAL_CLIENT_ID
 } = process.env;
 
-const DISCOVERY_KEYS_ENDPOINT = `${VITE_MSAL_TENANT_URL}/discovery/v2.0/keys`;
-const configPromise = axios.get(`${VITE_MSAL_TENANT_URL}/v2.0/.well-known/openid-configuration`);
+const DISCOVERY_KEYS_ENDPOINT = `${MSAL_TENANT_URL}/discovery/v2.0/keys`;
+const configPromise = axios.get(`${MSAL_TENANT_URL}/v2.0/.well-known/openid-configuration`);
 
 export default function validateJwt(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -21,7 +21,7 @@ export default function validateJwt(req, res, next) {
 
   return configPromise.then((config) => {
     const validationOptions = {
-      audience: VITE_MSAL_CLIENT_ID,
+      audience: MSAL_CLIENT_ID,
       issuer: config.issuer
     };
 

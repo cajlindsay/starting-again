@@ -22,7 +22,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 WORKDIR /app/webs/${app}
 
 # build
-RUN vite build --config ../../vite.web.config.js --mode ${mode}
+RUN vite build --config ../../_config-vite/vite.web.config.js --mode ${mode}
 
 # runtime image
 FROM nginx:1.23.3-alpine

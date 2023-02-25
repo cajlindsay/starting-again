@@ -13,7 +13,7 @@ function apiConfig(app, port) {
 function webConfig(app, port) {
   return {
     name: app,
-    script: 'vite --config ../../vite.web.config.js',
+    script: 'vite --config ../../_config-vite/vite.web.config.js',
     interpreter: 'none',
     cwd: `webs/${app}`,
     env: {

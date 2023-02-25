@@ -2,7 +2,7 @@
   "name": "@starting-again/web-common",
   "type": "module",
   "scripts": {
-    "test": "vitest  --config ../../vite.non-web.config.js --coverage",
+    "test": "vitest  --config ../../_config-vite/vite.non-web.config.js --coverage",
     "lint:es": "eslint **/*.js",
     "prettier": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --check .",
     "prettier:fix": "npm run prettier -- --write"
