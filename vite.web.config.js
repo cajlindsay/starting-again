@@ -9,9 +9,6 @@ const apis = [
 ];
 
 export default defineConfig({
-  // web app so appType should be 'spa' to include html middlewares
-  appType: 'spa',
-
   // global plugins
   plugins: [
     // react app
@@ -31,7 +28,8 @@ export default defineConfig({
     // expose on PORT provided by pm2
     port: process.env.PORT,
 
-    // proxy to all localhost apis
+    // all api requests from a web app call the web app's own url, but then
+    // proxy the requests to the apis
     proxy: apis.reduce(
       (prev, next) => ({
         ...prev,

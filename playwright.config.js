@@ -1,7 +1,8 @@
 import { defineConfig } from '@playwright/test';
 import path from 'path';
 
-const baseURL = 'http://localhost:5173';
+const webPort = 5172; // use a specific port for testing to not clash with ports being used by pm2
+const baseURL = `http://localhost:${webPort}`;
 
 export default defineConfig({
   // look for tests in the folder for the web project that is being tested
@@ -55,15 +56,16 @@ export default defineConfig({
   // run local dev server before starting the tests
   webServer: {
     // start the web server
-    command: 'npm run start',
+    command: 'vite --config ../../vite.web.config.js',
     url: baseURL,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
-    // make sure that the command above runs in the context of the web app under test
+    // make sure that the command runs in the context of the web app under test
     cwd: process.cwd(),
     // env variables to control the build output when in visual testing mode
     env: {
-      APP_ENV: 'visual_test'
+      APP_ENV: 'visual_test',
+      PORT: webPort
     }
   }
 });

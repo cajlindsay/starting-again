@@ -1,44 +1,32 @@
+function apiConfig(app, port) {
+  return {
+    name: app,
+    script: 'node-dev -r dotenv/config src/server.js dotenv_config_path=config-env/.env',
+    interpreter: 'none',
+    cwd: `apis/${app}`,
+    env: {
+      PORT: port
+    }
+  };
+}
+
+function webConfig(app, port) {
+  return {
+    name: app,
+    script: 'vite --config ../../vite.web.config.js',
+    interpreter: 'none',
+    cwd: `webs/${app}`,
+    env: {
+      PORT: port
+    }
+  };
+}
+
 module.exports = {
   apps: [
-    {
-      name: 'api-1',
-      script: 'npm',
-      args: 'start',
-      interpreter: 'none',
-      cwd: 'apis/api-1',
-      env: {
-        PORT: 3000
-      }
-    },
-    {
-      name: 'api-2',
-      script: 'npm',
-      args: 'start',
-      interpreter: 'none',
-      cwd: 'apis/api-2',
-      env: {
-        PORT: 3001
-      }
-    },
-    {
-      name: 'web-1',
-      script: 'npm',
-      args: 'start',
-      interpreter: 'none',
-      cwd: 'webs/web-1',
-      env: {
-        PORT: 5173
-      }
-    },
-    {
-      name: 'web-2',
-      script: 'npm',
-      args: 'start',
-      interpreter: 'none',
-      cwd: 'webs/web-2',
-      env: {
-        PORT: 5174
-      }
-    }
+    apiConfig('api-1', 3000),
+    apiConfig('api-2', 3001),
+    webConfig('web-1', 5173),
+    webConfig('web-2', 5174)
   ]
 };
