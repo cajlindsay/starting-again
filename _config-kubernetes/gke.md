@@ -123,6 +123,7 @@ kubectl exec -it web-1-694c6d5796-zg7nm -- sh
 ```
 
 4. You will probably need to install curl
+
 ```
 apk add --no-cache curl
 ```

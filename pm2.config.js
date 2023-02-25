@@ -23,10 +23,5 @@ function webConfig(app, port) {
 }
 
 module.exports = {
-  apps: [
-    apiConfig('api-1', 3000),
-    apiConfig('api-2', 3001),
-    webConfig('web-1', 5173),
-    webConfig('web-2', 5174)
-  ]
+  apps: [apiConfig('api-1', 3000), apiConfig('api-2', 3001), webConfig('web-1', 5173), webConfig('web-2', 5174)]
 };

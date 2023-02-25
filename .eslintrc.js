@@ -5,9 +5,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
-
-    },
+      jsx: true
+    }
   },
   env: {
     browser: true,
@@ -17,7 +16,7 @@ module.exports = {
   },
   settings: {
     react: {
-      version: 'detect',
-    },
-  },
+      version: 'detect'
+    }
+  }
 };

@@ -2,9 +2,9 @@ name: web 1
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
   workflow_dispatch:
     inputs:
       logLevel:
@@ -13,29 +13,28 @@ on:
         default: 'warning'
         type: choice
         options:
-        - info
-        - warning
-        - debug
-    
+          - info
+          - warning
+          - debug
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 19.4.0
-    - run: npm install
-    - run: npm run lint:es
-      working-directory: ./webs/web-1
-    - run: npm run prettier
-      working-directory: ./webs/web-1
-    - run: npm run lint:style
-      working-directory: ./webs/web-1
-    - run: npx playwright -- install-deps chrome
-    - run: npm run test:visual
-      working-directory: ./webs/web-1
-    - run: npx vite build --config ../../_config-vite/vite.web.config.js- --mode k8slocal
-      working-directory: ./webs/web-1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 19.4.0
+      - run: npm install
+      - run: npm run lint:es
+        working-directory: ./webs/web-1
+      - run: npm run prettier
+        working-directory: ./webs/web-1
+      - run: npm run lint:style
+        working-directory: ./webs/web-1
+      - run: npx playwright -- install-deps chrome
+      - run: npm run test:visual
+        working-directory: ./webs/web-1
+      - run: npx vite build --config ../../_config-vite/vite.web.config.js- --mode k8slocal
+        working-directory: ./webs/web-1

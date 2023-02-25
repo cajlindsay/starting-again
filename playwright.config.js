@@ -27,8 +27,8 @@ export default defineConfig({
   // reporter to use
   reporter: [
     [
-      'html', 
-      { 
+      'html',
+      {
         open: 'never',
         // drop report output to .playwright-report subfolder in project being tested
         outputFolder: path.join(process.cwd(), '.playwright-report')

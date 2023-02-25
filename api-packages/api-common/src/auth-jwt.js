@@ -2,10 +2,7 @@ import jwt from 'jsonwebtoken';
 import jwksClient from 'jwks-rsa';
 import axios from 'axios';
 
-const { 
-  MSAL_TENANT_URL, 
-  MSAL_CLIENT_ID
-} = process.env;
+const { MSAL_TENANT_URL, MSAL_CLIENT_ID } = process.env;
 
 const DISCOVERY_KEYS_ENDPOINT = `${MSAL_TENANT_URL}/discovery/v2.0/keys`;
 const configPromise = axios.get(`${MSAL_TENANT_URL}/v2.0/.well-known/openid-configuration`);
