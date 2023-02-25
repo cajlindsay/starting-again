@@ -57,7 +57,7 @@ Registries are a pain in the arse so instead we can build an image and export it
 in the root of the monorepo to build an api:
 
 ```
-docker build -f Dockerfile.api --build-arg app=api-1 -t api-1 .
+docker build -f _config-docker/Dockerfile.api --build-arg app=api-1 -t api-1 .
 mkdir dist
 docker save api-1 > dist/api-1.tar
 sudo microk8s ctr image import dist/api-1.tar
@@ -66,7 +66,7 @@ sudo microk8s ctr image import dist/api-1.tar
 or for a web:
 
 ```
-docker build -f Dockerfile.web --build-arg app=web-1 --build-arg mode=k8slocal -t web-1 .
+docker build -f _config-docker/Dockerfile.web --build-arg app=web-1 --build-arg mode=k8slocal -t web-1 .
 mkdir dist
 docker save web-1 > dist/web-1.tar
 sudo microk8s ctr image import dist/web-1.tar
@@ -74,9 +74,9 @@ sudo microk8s ctr image import dist/web-1.tar
 
 Note that deployments will not automatically use the new image....you will need to delete existing pods first.
 
-# Routing to match ingress configuration in k8s.yml
+# Routing to match ingress configuration in microk8s.yml
 
-Add these lines to the /etc/hosts file. This will match the k8x.yml ingress configuration. Sometimes this resets
+Add these lines to the /etc/hosts file. This will match the microk8s.yml ingress configuration. Sometimes this resets
 when your computer restarts so you may need to add these back if you cannot curl these URLs.
 
 ```
