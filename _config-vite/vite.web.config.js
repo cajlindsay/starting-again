@@ -21,7 +21,7 @@ export default defineConfig({
   ],
 
   // subfolder in project containing .env files
-  envDir: 'config-env',
+  envDir: '_config-env',
 
   // dev server config
   server: {

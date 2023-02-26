@@ -1,7 +1,7 @@
 function apiConfig(app, port) {
   return {
     name: app,
-    script: 'node-dev -r dotenv/config src/server.js dotenv_config_path=config-env/.env',
+    script: 'node-dev -r dotenv/config src/server.js dotenv_config_path=_config-env/.env',
     interpreter: 'none',
     cwd: `apis/${app}`,
     env: {
