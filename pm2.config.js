@@ -1,11 +1,14 @@
 function apiConfig(app, port) {
   return {
     name: app,
-    script: 'node-dev -r dotenv/config src/server.js dotenv_config_path=_config-env/.env',
+    script: 'node-dev -r dotenv/config src/server.js',
     interpreter: 'none',
     cwd: `apis/${app}`,
     env: {
-      PORT: port
+      PORT: port,
+      MSAL_TENANT_URL: 'https://login.microsoftonline.com/consumers',
+      MSAL_CLIENT_ID: 'ef0f1a58-5d27-48f4-a47d-043df4ea4c3f',
+      MSAL_CLIENT_SECRET: 'HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp'
     }
   };
 }

@@ -24,7 +24,7 @@ web
 - DONE scss and linting
 - redux
 - DONE visual snapshot testing
-- authentication
+- DONE authentication
 
 apis
 
