@@ -1,21 +1,8 @@
 # base image
-FROM node:19.4.0-alpine as build
+FROM starting-again-base:latest as build
 
 # args
 ARG app
-
-# create app directory
-RUN mkdir /app
-WORKDIR /app
-
-# add source files
-ADD . /app
-
-# install dependencies
-RUN npm install
-
-# env
-ENV PATH /app/node_modules/.bin:$PATH
 
 # switch to source directory
 WORKDIR /app/apis/${app}

@@ -19,6 +19,20 @@ wsl --shutdown
 wsl
 ```
 
+You will need to adjust microk8s group permissions for the commands in this document
+to work without sudo:
+```
+sudo usermod -a -G microk8s $USER
+sudo chown -f -R $USER ~/.kube
+newgrp microk8s
+```
+
+Enable add-ons:
+```
+microk8s enable ingress registry dashboard dns
+```
+
+
 # Useful stuff
 
 Start microk8s:
@@ -34,21 +48,13 @@ sudo snap install kubectl
 cd ~/
 mkdir .kube
 cd .kube
-sudo microk8s config > config
+microk8s config > config
 ```
 
 To view the dashboard:
 
 ```
-sudo microk8s dashboard-proxy
-```
-
-# Ingress
-
-To enable the ingress feature:
-
-```
-sudo microk8s enable ingress
+microk8s dashboard-proxy
 ```
 
 # Building docker images that microk8s can access

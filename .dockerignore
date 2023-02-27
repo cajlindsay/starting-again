@@ -2,3 +2,7 @@ dist
 node_modules
 bin
 coverage
+*.md
+*.sh
+_config-docker
+_config-kubernetes
