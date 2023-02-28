@@ -19,8 +19,14 @@ wsl --shutdown
 wsl
 ```
 
-You will need to adjust microk8s group permissions for the commands in this document
-to work without sudo:
+Install kubectl:
+
+```
+sudo snap install kubectl
+```
+
+Adjust microk8s group permissions for the commands in this document to work without sudo:
+
 ```
 sudo usermod -a -G microk8s $USER
 sudo chown -f -R $USER ~/.kube
@@ -28,10 +34,19 @@ newgrp microk8s
 ```
 
 Enable add-ons:
+
 ```
-microk8s enable ingress registry dashboard dns
+microk8s enable ingress registry dashboard dns cert-manager
 ```
 
+To make it easier to use kubectl:
+
+```
+cd ~/
+mkdir .kube
+cd .kube
+microk8s config > config
+```
 
 # Useful stuff
 
@@ -41,73 +56,61 @@ Start microk8s:
 sudo microk8s start
 ```
 
-To make it easier to use kubectl:
-
-```
-sudo snap install kubectl
-cd ~/
-mkdir .kube
-cd .kube
-microk8s config > config
-```
-
 To view the dashboard:
 
 ```
 microk8s dashboard-proxy
 ```
 
-# Building docker images that microk8s can access
-
-Registries are a pain in the arse so instead we can build an image and export it to the microk8s cache. Run these commands
-in the root of the monorepo to build an api:
+To update the entire cluster:
 
 ```
-docker build -f _config-docker/Dockerfile.api --build-arg app=api-1 -t api-1 .
-mkdir dist
-docker save api-1 > dist/api-1.tar
-sudo microk8s ctr image import dist/api-1.tar
+kubectl apply -f _config-kubernetes/microk8s.yml
+```
+
+# Routing to match ingress configuration in microk8s.yml
+
+Find the ip address that is exposed to the windows host by wsl. Run this command in WINDOWS terminal:
+
+```
+wsl hostname -I
+```
+
+This will print the ip address for wsl. The ip address is likely to start with '172....'
+
+Update your WINDOWS HOST FILE (C:/windows/System32/drivers/etc/hosts) and wsl host file (/etc/hosts) with these lines. Note that the ip address will be the one that you found above:
+
+```
+172.28.27.253   web-1.starting-again.info
+172.28.27.253   web-2.starting-again.info
+172.28.27.253   api.starting-again.info
+```
+
+# Building docker images and deploying to microk8s internal registry:
+
+Registries are a pain in the arse so instead we can build an image and export it to the microk8s cache. Run this script in the root of the monorepo to build an api:
+
+```
+./docker-build-api.sh api-1
 ```
 
 or for a web:
 
 ```
-docker build -f _config-docker/Dockerfile.web --build-arg app=web-1 --build-arg mode=k8slocal -t web-1 .
-mkdir dist
-docker save web-1 > dist/web-1.tar
-sudo microk8s ctr image import dist/web-1.tar
+./docker-build-web.sh web-1
 ```
 
 Note that deployments will not automatically use the new image....you will need to delete existing pods first.
 
-# Routing to match ingress configuration in microk8s.yml
+# tls
 
-Add these lines to the /etc/hosts file. This will match the microk8s.yml ingress configuration. Sometimes this resets
-when your computer restarts so you may need to add these back if you cannot curl these URLs.
-
-```
-127.0.0.1    web-1.starting-again.info
-127.0.0.1    web-2.starting-again.info
-127.0.0.1    api.starting-again.info
-```
-
-The ingress by default hosts on port 80. Inside wsl you can curl http://web-1.starting-again.info and get a response, but,
-this is a problem where you are not able to see the website in your windows browser at http://web-1.starting-again.info.
-To get around this, firstly find the ip address that is exposed to the windows host by wsl. Do this with these commands:
+Useful commands for working out why cert-manager is not issuing tls certificates:
 
 ```
-sudo apt install net-tools
-ifconfig
-```
-
-This will print all of the wsl network interfaces. Look for and try in your windows browser all of the ip addresses
-starting with '192.168...' or ' 172.....'. It can change so you may need to do this sometimes when you restart.
-
-When you have identified the correct ip address, update your WINDOWS HOST FILE (C:/windows/System32/drivers/etc/hosts)
-with these lines:
-
-```
-192.168.154.68    web-1.starting-again.info
-192.168.154.68    web-2.starting-again.info
-192.168.154.68    api.starting-again.info
+kubectl get clusterissuer
+kubectl get certificaterequests
+kubectl get orders
+kubectl get certificates
+kubectl get challenges
+kubectl get secrets
 ```
