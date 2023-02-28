@@ -1,7 +1,18 @@
+#NOTE: NOT FULLY FUNCTIONAL AT THE MOMENT. NO DOMAIN NAME SET UP FOR GKE CLUSTER
 apiVersion: v1
 kind: Namespace
 metadata:
   name: starting-again
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-msal-config
+  namespace: starting-again
+data:
+  MSAL_TENANT_URL: https://login.microsoftonline.com/consumers
+  MSAL_CLIENT_ID: ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
+  MSAL_CLIENT_SECRET: HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -9,23 +20,62 @@ metadata:
   name: qpp-ingress
   namespace: starting-again
   annotations:
+    nginx.ingress.kubernetes.io/ingress.class: 'nginx'
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/enable-cors: 'true'
     nginx.ingress.kubernetes.io/cors-allow-origin: '*'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/ingress.allow-http: 'false'
 spec:
   defaultBackend:
     service:
-      name: web-1
+      name: noop
       port:
-        number: 80
+        number: 3000
+
   rules:
-    - http:
+    - host: api.starting-again.info
+      http:
         paths:
-          - path: /
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: noop
+                port:
+                  number: 3000
+          - path: /api-1
+            pathType: Prefix
+            backend:
+              service:
+                name: api-1
+                port:
+                  number: 3000
+          - path: /api-2
+            pathType: Prefix
+            backend:
+              service:
+                name: api-2
+                port:
+                  number: 3000
+    - host: web-1.starting-again.info
+      http:
+        paths:
+          - path: /?(.*) # solves content-type rewrite issue with non-html files
             pathType: Prefix
             backend:
               service:
                 name: web-1
+                port:
+                  number: 80
+    - host: web-2.starting-again.info
+      http:
+        paths:
+          - path: /?(.*) # solves content-type rewrite issue with non-html files
+            pathType: Prefix
+            backend:
+              service:
+                name: web-2
                 port:
                   number: 80
 ---
@@ -69,6 +119,43 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: api-2
+  namespace: starting-again
+  labels:
+    app: api-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-2
+  template:
+    metadata:
+      labels:
+        app: api-2
+    spec:
+      containers:
+        - name: api-2
+          image: gcr.io/starting-again-377302/api-2:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-2
+  namespace: starting-again
+spec:
+  selector:
+    app: api-2
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: web-1
   namespace: starting-again
   labels:
@@ -102,3 +189,77 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-2
+  namespace: starting-again
+  labels:
+    app: web-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-2
+  template:
+    metadata:
+      labels:
+        app: web-2
+    spec:
+      containers:
+        - name: web-2
+          image: gcr.io/starting-again-377302/web-2:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-2
+  namespace: starting-again
+spec:
+  selector:
+    app: web-2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noop
+  namespace: starting-again
+  labels:
+    app: noop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: noop
+  template:
+    metadata:
+      labels:
+        app: noop
+    spec:
+      containers:
+        - name: noop
+          image: gcr.io/starting-again-377302/noop:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: noop
+  namespace: starting-again
+spec:
+  selector:
+    app: noop
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
