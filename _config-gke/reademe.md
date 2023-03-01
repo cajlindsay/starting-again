@@ -1,4 +1,15 @@
-# Installation and authentication
+# Cluster setup
+
+1. Create a GKE cluster in the google cloud portal
+2. Create/register a domain name in the google cloud portal
+3. Create an A record for the domain name, pointing it to the cluster's ip address (in the google cloud portal)
+4. Apply the config file
+
+```
+kubectl apply -f _config-gke/config.yml
+```
+
+# gcloud cli installation and authentication
 
 1. Install gcloud sdk:
 
@@ -64,7 +75,7 @@ docker tag web-1 gcr.io/starting-again-377302/web-1
 docker push gcr.io/starting-again-377302/web-1
 ```
 
-# GKE setup
+# GKE local setup
 
 1. Install auth plugin for GKE
 
@@ -75,13 +86,13 @@ gcloud components install gke-gcloud-auth-plugin
 2. Authenticate with GKE
 
 ```
-gcloud container clusters get-credentials starting-again-cluster --region=australia-southeast1
+gcloud container clusters get-credentials starting-again --region=australia-southeast1
 ```
 
 3. Tell kubectl to use the GKE cluster as the current context
 
 ```
-kubectl config use-context gke_starting-again-377302_australia-southeast1_starting-again-cluster
+kubectl config use-context gke_starting-again-377302_australia-southeast1_starting-again
 ```
 
 4. Confirm that the context has been set correctly
@@ -98,6 +109,20 @@ Get a list of all clusters
 
 ```
 gcloud container clusters list
+```
+
+# Build and push image to google container registry
+
+Run this script in the root of the monorepo to build an api:
+
+```
+./build-api.sh api-1
+```
+
+or for a web:
+
+```
+./build-web.sh web-1
 ```
 
 # Checking whether a service and deployment are working internally

@@ -25,6 +25,7 @@ web
 - redux
 - DONE visual snapshot testing
 - DONE authentication
+- change prod builds to use environment variables rather than vite's environment variables
 
 apis
 

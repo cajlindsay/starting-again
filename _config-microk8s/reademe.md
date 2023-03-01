@@ -65,7 +65,7 @@ microk8s dashboard-proxy
 To update the entire cluster:
 
 ```
-kubectl apply -f _config-kubernetes/microk8s.yml
+kubectl apply -f _config-microk8s/config.yml
 ```
 
 # Routing to match ingress configuration in microk8s.yml
@@ -91,16 +91,16 @@ Update your WINDOWS HOST FILE (C:/windows/System32/drivers/etc/hosts) and wsl ho
 Registries are a pain in the arse so instead we can build an image and export it to the microk8s cache. Run this script in the root of the monorepo to build an api:
 
 ```
-./docker-build-api.sh api-1
+./build-api.sh api-1
 ```
 
 or for a web:
 
 ```
-./docker-build-web.sh web-1
+./build-web.sh web-1
 ```
 
-Note that deployments will not automatically use the new image....you will need to delete existing pods first.
+Note that deployments will NOTE automatically use the new image....you will need to delete existing pods first.
 
 # tls
 
