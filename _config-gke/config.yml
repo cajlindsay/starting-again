@@ -13,19 +13,32 @@ data:
   MSAL_CLIENT_ID: ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
   MSAL_CLIENT_SECRET: HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp
 ---
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: ingress-frontendconfig
+  namespace: starting-again
+spec:
+  redirectToHttps:
+    enabled: true
+    responseCodeName: FOUND
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: qpp-ingress
   namespace: starting-again
   annotations:
-    kubernetes.io/ingress.class: 'gce'
+    kubernetes.io/ingress.global-static-ip-name: starting-again-cluster-ip
     networking.gke.io/managed-certificates: managed-cert
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.ingress.kubernetes.io/enable-cors: 'true'
-    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
-    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
-    nginx.ingress.kubernetes.io/ingress.allow-http: 'false'  
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/v1beta1.FrontendConfig: ingress-frontendconfig
+    #ingress.kubernetes.io/custom-request-headers: 'access-control-allow-origin: *'
+    #nginx.ingress.kubernetes.io/rewrite-target: /$1
+    #kubernetes.io/enable-cors: 'true'
+    #kubernetes.io/cors-allow-origin: '*'
+    #kubernetes.io/force-ssl-redirect: 'true'
+    #kubernetes.io/ingress.allow-http: 'false'
 spec:
   rules:
     - host: api.txtack.net

@@ -1,9 +1,10 @@
 # Cluster setup
 
 1. Create a GKE cluster in the google cloud portal
-2. Create/register a domain name in the google cloud portal
-3. Create an A record for the domain name, pointing it to the cluster's ip address (in the google cloud portal)
-4. Apply the config file
+2. Create a static ip address in the google cloud portal
+3. Create/register a domain name in the google cloud portal
+4. Create an A record for the domain name, pointing it to the cluster's ip address (in the google cloud portal)
+4. Apply the cluster config file
 
 ```
 kubectl apply -f _config-gke/config.yml
