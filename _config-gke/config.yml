@@ -19,14 +19,13 @@ metadata:
   name: qpp-ingress
   namespace: starting-again
   annotations:
-    nginx.ingress.kubernetes.io/ingress.class: 'gce'
+    kubernetes.io/ingress.class: 'gce'
     networking.gke.io/managed-certificates: managed-cert
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/enable-cors: 'true'
     nginx.ingress.kubernetes.io/cors-allow-origin: '*'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
-    nginx.ingress.kubernetes.io/ingress.allow-http: 'false'
-    nginx.ingress.kubernetes.io/ingress.global-static-ip-name: starting-again-ingress    
+    nginx.ingress.kubernetes.io/ingress.allow-http: 'false'  
 spec:
   rules:
     - host: api.txtack.net
