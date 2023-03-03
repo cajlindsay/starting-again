@@ -1,6 +1,6 @@
 import * as msal from '@azure/msal-browser';
 
-const { VITE_MSAL_CLIENT_ID, VITE_MSAL_AUTHORITY } = import.meta.env;
+const { VITE_MSAL_CLIENT_ID, VITE_MSAL_AUTHORITY } = window.env;
 
 const msalInstance = new msal.PublicClientApplication({
   auth: {

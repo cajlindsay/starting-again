@@ -3,6 +3,26 @@ kind: Namespace
 metadata:
   name: starting-again
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-msal-config
+  namespace: starting-again
+data:
+  MSAL_TENANT_URL: https://login.microsoftonline.com/consumers
+  MSAL_CLIENT_ID: ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
+  MSAL_CLIENT_SECRET: HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-msal-config
+  namespace: starting-again
+data:
+  VITE_API_URL: https://api.starting-again.info
+  VITE_MSAL_CLIENT_ID: ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
+  VITE_MSAL_AUTHORITY: https://login.microsoftonline.com/consumers
+---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -17,7 +37,7 @@ metadata:
   namespace: starting-again
 spec:
   isCA: true
-  commonName: selfsigned-certificate
+  commonName: tls-cert
   secretName: ingress-tls-secret
   privateKey:
     algorithm: ECDSA
@@ -26,6 +46,13 @@ spec:
     name: selfsigned-cluster-issuer
     kind: ClusterIssuer
     group: cert-manager.io
+  subject:
+    organizations:
+      - Techstack Ltd
+    organizationalUnits:
+      - Devops
+  dnsNames:
+    - '*.starting-again.info'
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -35,16 +62,6 @@ metadata:
 spec:
   ca:
     secretName: ingress-tls-secret
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: api-msal-config
-  namespace: starting-again
-data:
-  MSAL_TENANT_URL: https://login.microsoftonline.com/consumers
-  MSAL_CLIENT_ID: ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
-  MSAL_CLIENT_SECRET: HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -56,19 +73,13 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/enable-cors: 'true'
     nginx.ingress.kubernetes.io/cors-allow-origin: '*'
-    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
-    nginx.ingress.kubernetes.io/ingress.allow-http: 'false'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/ingress.allow-http: 'true'
 spec:
   tls:
     - hosts:
-        - '*.starting-again.info'
+        - '*.atarting-again.info'
       secretName: ingress-tls-secret
-
-  defaultBackend:
-    service:
-      name: noop
-      port:
-        number: 3000
 
   rules:
     - host: api.starting-again.info
@@ -104,7 +115,7 @@ spec:
               service:
                 name: web-1
                 port:
-                  number: 80
+                  number: 3000
     - host: web-2.starting-again.info
       http:
         paths:
@@ -114,7 +125,7 @@ spec:
               service:
                 name: web-2
                 port:
-                  number: 80
+                  number: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -218,7 +229,10 @@ spec:
           image: web-1
           imagePullPolicy: Never
           ports:
-            - containerPort: 80
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: web-msal-config
 ---
 kind: Service
 apiVersion: v1
@@ -230,8 +244,8 @@ spec:
     app: web-1
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 3000
+      targetPort: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -255,7 +269,10 @@ spec:
           image: web-2
           imagePullPolicy: Never
           ports:
-            - containerPort: 80
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: web-msal-config
 ---
 kind: Service
 apiVersion: v1
@@ -267,8 +284,8 @@ spec:
     app: web-2
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 3000
+      targetPort: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment

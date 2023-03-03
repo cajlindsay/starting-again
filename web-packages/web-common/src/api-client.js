@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getBearerToken, logOut } from './auth.js';
 
-const { VITE_API_URL } = import.meta.env;
+const { VITE_API_URL } = window.env;
 
 const api = axios.create({
   baseURL: VITE_API_URL,

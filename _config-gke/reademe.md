@@ -1,4 +1,4 @@
-# Cluster setup
+# Creating the cluster
 
 1. Create a GKE cluster in the google cloud portal
 2. Create a static ip address in the google cloud portal
@@ -34,7 +34,7 @@ gcloud auth login --billing-project 01960E-2E6B11-46F100
 gcloud config set project starting-again-377302
 ```
 
-# Container registry setup
+# Container registry authentication
 
 1. Identify the appropriate service account in the service accounts list
 

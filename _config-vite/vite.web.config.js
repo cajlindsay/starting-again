@@ -23,6 +23,11 @@ export default defineConfig({
   // subfolder in project containing .env files
   envDir: '_config-env',
 
+  build: {
+    outDir: 'dist/static',
+    assetsDir: ''
+  },
+
   // dev server config
   server: {
     // expose on PORT provided by pm2

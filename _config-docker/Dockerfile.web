@@ -3,19 +3,28 @@ FROM starting-again-base:latest as build
 
 # args
 ARG app
-ARG mode
 
 # switch to source directory
 WORKDIR /app/webs/${app}
 
-# build
-RUN vite build --config ../../_config-vite/vite.web.config.js --mode ${mode}
+# build the web
+RUN vite build --config ../../_config-vite/vite.web.config.js
+
+# build the server
+RUN esbuild src/server.js --platform=node --bundle --minify --outfile=dist/index.js
 
 # runtime image
-FROM nginx:1.23.3-alpine
+FROM node:19.4.0-alpine
+
+# create app directory
+RUN mkdir /app
+WORKDIR /app
 
 # args
 ARG app
 
 # copy build files
-COPY --from=build /app/webs/${app}/dist /usr/share/nginx/html
+COPY --from=build /app/webs/${app}/dist /app
+
+# run the server when the container starts
+CMD node index.js
