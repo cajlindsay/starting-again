@@ -13,6 +13,28 @@ data:
   MSAL_CLIENT_ID: ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
   MSAL_CLIENT_SECRET: HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-msal-config
+  namespace: starting-again
+data:
+  VITE_API_URL: https://api.starting-again.info
+  VITE_MSAL_CLIENT_ID: ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
+  VITE_MSAL_AUTHORITY: https://login.microsoftonline.com/consumers
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+  namespace: starting-again
+spec:
+  domains:
+    - api.txtack.net
+    - web-1.txtack.net
+    - web-2.txtack.net
+    - web-ts-graphql.txtack.net
+---
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
@@ -65,6 +87,13 @@ spec:
                 name: api-2
                 port:
                   number: 3000
+          - path: /graphql-server
+            pathType: Prefix
+            backend:
+              service:
+                name: graphql-server
+                port:
+                  number: 3000
     - host: web-1.txtack.net
       http:
         paths:
@@ -74,7 +103,7 @@ spec:
               service:
                 name: web-1
                 port:
-                  number: 80
+                  number: 3000
     - host: web-2.txtack.net
       http:
         paths:
@@ -84,7 +113,17 @@ spec:
               service:
                 name: web-2
                 port:
-                  number: 80
+                  number: 3000
+    - host: web-ts-graphql.txtack.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-ts-graphql
+                port:
+                  number: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -169,6 +208,43 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: graphql-server
+  namespace: starting-again
+  labels:
+    app: graphql-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql-server
+  template:
+    metadata:
+      labels:
+        app: graphql-server
+    spec:
+      containers:
+        - name: graphql-server
+          image: gcr.io/starting-again-377302/graphql-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: graphql-server
+  namespace: starting-again
+spec:
+  selector:
+    app: graphql-server
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: web-1
   namespace: starting-again
   labels:
@@ -188,7 +264,10 @@ spec:
           image: gcr.io/starting-again-377302/web-1:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: web-msal-config
 ---
 kind: Service
 apiVersion: v1
@@ -200,8 +279,8 @@ spec:
     app: web-1
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 3000
+      targetPort: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -225,7 +304,10 @@ spec:
           image: gcr.io/starting-again-377302/web-2:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: web-msal-config
 ---
 kind: Service
 apiVersion: v1
@@ -237,8 +319,48 @@ spec:
     app: web-2
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-ts-graphql
+  namespace: starting-again
+  labels:
+    app: web-ts-graphql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-ts-graphql
+  template:
+    metadata:
+      labels:
+        app: web-ts-graphql
+    spec:
+      containers:
+        - name: web-ts-graphql
+          image: gcr.io/starting-again-377302/web-ts-graphql:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: web-msal-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-ts-graphql
+  namespace: starting-again
+spec:
+  selector:
+    app: web-ts-graphql
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
