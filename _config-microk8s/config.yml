@@ -106,6 +106,13 @@ spec:
                 name: api-2
                 port:
                   number: 3000
+          - path: /graphql-server
+            pathType: Prefix
+            backend:
+              service:
+                name: graphql-server
+                port:
+                  number: 3000
     - host: web-1.starting-again.info
       http:
         paths:
@@ -124,6 +131,16 @@ spec:
             backend:
               service:
                 name: web-2
+                port:
+                  number: 3000
+    - host: web-ts-graphql.starting-again.info
+      http:
+        paths:
+          - path: /?(.*) # solves content-type rewrite issue with non-html files
+            pathType: Prefix
+            backend:
+              service:
+                name: web-ts-graphql
                 port:
                   number: 3000
 ---
@@ -322,6 +339,86 @@ metadata:
 spec:
   selector:
     app: noop
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-ts-graphql
+  namespace: starting-again
+  labels:
+    app: web-ts-graphql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-ts-graphql
+  template:
+    metadata:
+      labels:
+        app: web-ts-graphql
+    spec:
+      containers:
+        - name: web-ts-graphql
+          image: web-ts-graphql
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: web-msal-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-ts-graphql
+  namespace: starting-again
+spec:
+  selector:
+    app: web-ts-graphql
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-server
+  namespace: starting-again
+  labels:
+    app: graphql-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql-server
+  template:
+    metadata:
+      labels:
+        app: graphql-server
+    spec:
+      containers:
+        - name: graphql-server
+          image: graphql-server
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: api-msal-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: graphql-server
+  namespace: starting-again
+spec:
+  selector:
+    app: graphql-server
   ports:
     - protocol: TCP
       port: 3000

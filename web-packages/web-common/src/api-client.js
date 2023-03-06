@@ -11,8 +11,6 @@ const api = axios.create({
   }
 });
 
-setTimeout(() => {}, 1000);
-
 api.defaults.headers.Accept = 'application/json';
 api.defaults.headers['Content-Type'] = 'application/json';
 

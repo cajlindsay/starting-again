@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 19.4.0
       - run: npm install
-      - run: npm run lint:es
+      - run: npm run lint:code
         working-directory: ./webs/web-1
       - run: npm run prettier
         working-directory: ./webs/web-1

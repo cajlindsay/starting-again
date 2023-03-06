@@ -1,11 +1,15 @@
 root: true
-extends: 
-- 'eslint:recommended'
-- 'plugin:react/recommended'
-- 'prettier'
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:react/recommended
+  - prettier
+parser: "@typescript-eslint/parser"
+plugins:
+  - "@typescript-eslint"
 parserOptions:
-  ecmaVersion: 'latest'
-  sourceType: 'module'
+  ecmaVersion: latest
+  sourceType: module
   ecmaFeatures:
     jsx: true
 env:
@@ -15,6 +19,9 @@ env:
   es6: true
 settings:
   react:
-    version: 'detect'
-#ignorePatterns:
-#  - 'dist'
+    version: detect
+ignorePatterns:
+  - dist
+  - node_modules
+  - bin
+  - coverage

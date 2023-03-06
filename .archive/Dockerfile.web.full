@@ -19,7 +19,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 #lint
 WORKDIR /app/webs/${app}
-RUN npm run lint:es
+RUN npm run lint:code
 RUN npm run prettier
 RUN npm run lint:style
 

@@ -3,9 +3,9 @@ export {};
 declare global {
   interface Window {
     env: {
-      VITE_API_URL: String;
-      VITE_MSAL_CLIENT_ID: String;
-      VITE_MSAL_AUTHORITY: String;
+      VITE_API_URL: string;
+      VITE_MSAL_CLIENT_ID: string;
+      VITE_MSAL_AUTHORITY: string;
     };
   }
 }

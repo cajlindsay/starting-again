@@ -4,3 +4,4 @@ docker build -f _config-docker/Dockerfile.web --build-arg app=$1 --build-arg mod
 mkdir -p dist
 docker save $1 > dist/$1.tar
 microk8s ctr image import dist/$1.tar
+kubectl delete pods -l app=$1 --namespace starting-again

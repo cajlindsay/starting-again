@@ -1,5 +1,3 @@
-export {};
-
 window.env = {
   VITE_API_URL: '',
   VITE_MSAL_CLIENT_ID: 'ef0f1a58-5d27-48f4-a47d-043df4ea4c3f',

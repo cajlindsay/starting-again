@@ -3,8 +3,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest --config ../../_config-vite/vite.web.config.js --coverage",
-    "lint:style": "stylelint **/*.scss",
-    "lint:es": "eslint **/*.js **/*.jsx --ignore-path ../../.eslintignore",
+    "lint:style": "stylelint \"**/*.{scss,css}\"",
+    "lint:code": "eslint \"**/*.{ts,tsx,js,jsx}\"",
     "prettier": "prettier --config ../../.prettierrc.yaml --ignore-path ../../.prettierignore --check .",
     "prettier:fix": "npm run prettier -- --write",
     "test:visual": "playwright test --config ../../playwright.config.ts"
