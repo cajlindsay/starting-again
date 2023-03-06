@@ -23,9 +23,16 @@ web
 - DONE call apis
 - DONE scss and linting
 - redux
+- graphql
+- typescript
+- vue
+- angular
+- styles
+- routing
 - DONE visual snapshot testing
 - DONE authentication
-- change prod builds to use environment variables rather than vite's environment variables
+- DONE change prod builds to use environment variables rather than vite's environment variables
+- update github build actions to use docker.
 
 apis
 

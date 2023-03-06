@@ -1,6 +1,7 @@
 {
   "name": "starting-again",
   "private": true,
+  "type": "module",
   "workspaces": [
     "apis/*",
     "api-packages/*",
@@ -8,9 +9,9 @@
     "web-packages/*"
   ],
   "scripts": {
-    "start": "pm2 start pm2.config.js",
-    "stop": "pm2 stop pm2.config.js",
-    "kill": "pm2 delete pm2.config.js",
+    "start": "pm2 start pm2.config.cjs",
+    "stop": "pm2 stop pm2.config.cjs",
+    "kill": "pm2 delete pm2.config.cjs",
     "monitor": "pm2 monit",
     "pw": "playwright"
   },
@@ -19,6 +20,8 @@
     "axios": "1.3.0",
     "connect-history-api-fallback": "2.0.0",
     "express": "4.18.2",
+    "express-graphql": "0.12.0",
+    "graphql": "15.8.0",
     "jsonwebtoken": "9.0.0",
     "jwks-rsa": "3.0.1",
     "passport-azure-ad": "4.3.4",
@@ -30,6 +33,8 @@
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
     "@vitejs/plugin-legacy": "3.0.2",
     "@vitejs/plugin-react": "3.0.1",
     "@vitest/coverage-c8": "0.28.3",
@@ -47,6 +52,7 @@
     "sass": "1.57.1",
     "stylelint": "14.16.1",
     "stylelint-config-standard-scss": "6.1.0",
+    "typescript": "4.9.5",
     "vite": "4.0.4",
     "vitest": "0.28.2"
   }

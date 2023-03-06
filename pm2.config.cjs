@@ -29,7 +29,9 @@ module.exports = {
   apps: [
     apiConfig('api-1', 3000), // prettier force array wrap
     apiConfig('api-2', 3001),
+    apiConfig('graphql-server', 3002),
     webConfig('web-1', 5173),
-    webConfig('web-2', 5174)
+    webConfig('web-2', 5174),
+    webConfig('web-ts-graphql', 5175)
   ]
 };

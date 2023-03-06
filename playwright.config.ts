@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 import path from 'path';
 
-const webPort = 5172; // use a specific port for testing to not clash with ports being used by pm2
+const webPort = '5172'; // use a specific port for testing to not clash with ports being used by pm2
 const baseURL = `http://localhost:${webPort}`;
 
 export default defineConfig({

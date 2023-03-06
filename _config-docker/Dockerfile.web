@@ -11,7 +11,7 @@ WORKDIR /app/webs/${app}
 RUN vite build --config ../../_config-vite/vite.web.config.js
 
 # build the server
-RUN esbuild src/server.js --platform=node --bundle --minify --outfile=dist/index.js
+RUN esbuild src/server.ts --platform=node --bundle --minify --outfile=dist/index.js
 
 # runtime image
 FROM node:19.4.0-alpine

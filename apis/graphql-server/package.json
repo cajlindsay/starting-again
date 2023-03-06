@@ -1,8 +1,8 @@
 {
-  "name": "@starting-again/package-2",
+  "name": "@starting-again/graphql-server",
   "type": "module",
   "scripts": {
-    "test": "vitest  --config ../../_config-vite/vite.non-web.config.js --coverage",
+    "test": "vitest --config ../../_config-vite/vite.non-web.config.js --coverage",
     "lint:es": "eslint **/*.js --ignore-path ../../.eslintignore",
     "prettier": "prettier --config ../../.prettierrc.yaml --ignore-path ../../.prettierignore --check .",
     "prettier:fix": "npm run prettier -- --write"

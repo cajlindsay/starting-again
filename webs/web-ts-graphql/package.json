@@ -1,5 +1,5 @@
 {
-  "name": "@starting-again/web-2",
+  "name": "@starting-again/web-ts-graphql",
   "type": "module",
   "scripts": {
     "test": "vitest --config ../../_config-vite/vite.web.config.js --coverage",
