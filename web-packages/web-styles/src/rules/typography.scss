@@ -1,0 +1,50 @@
+@use '../mixins/states' as states;
+@use '../variables/color-palette' as colors;
+
+h1 {
+  font-size: 64px;
+  line-height: 1em;
+  letter-spacing: -2px;
+}
+
+h3 {
+  font-size: 32px;
+  line-height: 1em;
+  letter-spacing: -1px;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+a,
+a:disabled,
+a:visited {
+  color: initial;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  @include states.hover-and-active {
+    color: colors.$primary;
+  }
+}
+
+p {
+  a,
+  a:disabled,
+  a:visited {
+    color: colors.$primary;
+    text-decoration: underline;
+
+    @include states.hover-and-active {
+      color: colors.$primary-alt01;
+    }
+  }
+}

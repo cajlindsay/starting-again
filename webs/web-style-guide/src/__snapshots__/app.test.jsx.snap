@@ -1,0 +1,32 @@
+// Vitest Snapshot v1
+
+exports[`App > renders 1`] = `
+<DocumentFragment>
+  <div
+    id="app"
+  >
+    <div>
+      web 1
+    </div>
+    <div
+      class="foo"
+    >
+      1
+    </div>
+    <div>
+      http://localhost:3000
+    </div>
+    <div>
+      1234
+    </div>
+    <div>
+      <button>
+        API 1
+      </button>
+      <button>
+        API 2
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

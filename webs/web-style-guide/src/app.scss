@@ -1,0 +1,10 @@
+#app {
+  color: #000;
+
+  $something: green;
+
+  .foo {
+    color: $something;
+    display: flex;
+  }
+}

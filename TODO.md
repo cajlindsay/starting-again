@@ -23,7 +23,7 @@ web
 - DONE call apis
 - DONE scss and linting
 - redux
-- graphql
+- IN PROGRESS graphql
 - typescript
 - vue
 - angular

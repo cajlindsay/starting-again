@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <div id="app">
-      <div>web 1</div>
+      <div>web ts graphql</div>
       <div>
         <button onClick={onRollDiceClick}>Roll dice</button>
         {data && <pre>{JSON.stringify(data, null, 2)}</pre>}

@@ -1,0 +1,32 @@
+@use '../variables/color-palette' as colors;
+@use '../variables/fonts' as fonts;
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  
+  background-color: colors.$neutral-light;
+}
+
+body * {
+  color: colors.$tertiary;
+  font-family: fonts.$primary;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 24px;
+} 
+
+*,
+*:focus {
+  outline: none !important;
+}
+
+.noscroll {
+  overflow: hidden !important;
+}
+
+.hidden {
+  display: none !important;
+}

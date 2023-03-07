@@ -1,0 +1,43 @@
+@use './devices' as devices;
+
+@mixin hover {
+  @include devices.non-touch-only {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin active {
+  &:active,
+  &.active {
+    @content;
+  }
+}
+
+@mixin hover-and-active {
+
+  @include hover {
+    @content;
+  }
+
+  @include active {
+    @content;
+  }
+}
+
+@mixin disabled {
+  &:disabled,
+  &[disabled],
+  .disabled {
+    @content;
+
+    @include hover {
+      @content;
+    }
+  
+    @include active {
+      @content;
+    }
+  }
+}

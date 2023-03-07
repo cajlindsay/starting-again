@@ -1,0 +1,160 @@
+@use '../variables/color-palette' as colors;
+@use '../mixins/states' as states;
+
+%base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  text-decoration: none;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+  outline: 0;
+  outline: none;
+
+  transition: 100ms linear background-color, 100ms linear color, 100ms linear border-color, 100ms linear box-shadow;
+  appearance: none;
+  user-select: none;
+
+  @include states.hover-and-active {
+    text-decoration: none;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:focus {
+    text-decoration: none;
+
+    outline: none;
+  }
+}
+
+%style-primary {
+  color: colors.$neutral-white;
+
+  background-color: colors.$primary;
+  border-color: colors.$primary;
+  box-shadow: 0 0 24.4898px rgba(colors.$primary-alt01-400, 0.3);
+
+  @include states.hover-and-active {
+    background-color: colors.$primary-alt01;
+    border-color: colors.$primary-alt01;
+  }
+
+  @include states.disabled {
+    background-color: colors.$primary-300;
+    border-color: colors.$primary-300;
+  }
+}
+
+%style-secondary {
+  color: colors.$tertiary;
+
+  background-color: colors.$neutral-white;
+  border: 0;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.15);
+
+  @include states.hover-and-active {
+    color: colors.$primary-alt01;
+  }
+
+  @include states.disabled {
+    color: colors.$tertiary-200;
+  }
+}
+
+%size-standard {
+  height: 60px;
+  padding: 0 30px;
+
+  font-size: 16px;
+  line-height: 1em;
+
+  border-radius: 30px;  
+}
+
+%size-medium {
+  height: 44px;
+  padding: 0 24px;
+
+  font-size: 14px;
+  line-height: 1em;
+
+  border-radius: 30px;  
+}
+
+%size-small {
+  height: 36px;
+  padding: 0 24px;
+
+  font-size: 14px;
+  line-height: 1em;
+
+  border-radius: 30px;  
+}
+
+// *basic classes
+.btn-size-standard {
+  @extend %base;
+  @extend %size-standard;
+}
+
+.btn-size-medium {
+  @extend %base;
+  @extend %size-medium;
+}
+
+.btn-size-small {
+  @extend %base;
+  @extend %size-small;
+}
+
+.btn-style-primary {
+  @extend %base;
+  @extend %style-primary;
+}
+
+.btn-style-secondary {
+  @extend %base;
+  @extend %style-secondary;
+}
+
+// *combined classes
+.btn-primary-standard {
+  @extend %base;
+  @extend %style-primary;
+  @extend %size-standard;
+}
+
+.btn-secondary-standard {
+  @extend %base;
+  @extend %style-secondary;
+  @extend %size-standard;
+}
+
+.btn-primary-medium {
+  @extend %base;
+  @extend %style-primary;
+  @extend %size-medium;
+}
+
+.btn-secondary-medium {
+  @extend %base;
+  @extend %style-secondary;
+  @extend %size-medium;
+}
+
+.btn-primary-small {
+  @extend %base;
+  @extend %style-primary;
+  @extend %size-small;
+}
+
+.btn-secondary-small {
+  @extend %base;
+  @extend %style-secondary;
+  @extend %size-small;
+}

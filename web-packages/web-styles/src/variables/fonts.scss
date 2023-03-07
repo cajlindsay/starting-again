@@ -1,0 +1,7 @@
+// normal (400), bold (700), lighter (200)
+$primary: Roboto;
+
+// basically the regular font...this allows us to 
+// occassionally display a bold version of the regular 
+// font if we want to.
+$secondary: Roboto, $primary;

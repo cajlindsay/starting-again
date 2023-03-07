@@ -1,0 +1,74 @@
+@use './buttons';
+@use '../mixins/states' as states;
+@use '../variables/color-palette' as colors;
+
+.tabs {
+  display: flex;
+
+  > a,
+  > button,
+  > .tab {
+    @extend %style-primary;
+    
+    height: 48px;
+    margin-right: 5px;
+
+    color: colors.$primary !important;
+    font-size: 18px;
+
+    background-color: transparent;
+    border-color: transparent;
+    border-width: 1px;
+  
+    &:disabled {
+      color: colors.$tertiary-300 !important;
+  
+      background-color: transparent !important;
+      border-color: transparent !important;
+    }
+  }
+
+  &.active-full {
+    > a,
+    > button,
+    > .tab {    
+      @include states.hover {  
+        border-color: colors.$primary;
+      }
+  
+      @include states.active {
+        color: colors.$primary-300 !important;
+    
+        background-color: colors.$primary;
+        border-color: colors.$primary;
+  
+        @include states.hover { 
+          color: colors.$primary-300 !important;
+    
+          background-color: colors.$primary-alt01;
+          border-color: colors.$primary-alt01;
+        }
+      }
+    }
+  } 
+
+  &.active-hollow {
+    > a,
+    > button,
+    > .tab {    
+      @include states.hover {
+        border-color: colors.$primary;
+      }
+  
+      @include states.active {  
+        border-color: colors.$primary;
+  
+        @include states.hover {
+          color: colors.$primary-alt01;
+          
+          border-color: colors.$primary-alt01;
+        }
+      }
+    }
+  } 
+}

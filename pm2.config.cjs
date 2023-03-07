@@ -32,6 +32,7 @@ module.exports = {
     apiConfig('graphql-server', 3002),
     webConfig('web-1', 5173),
     webConfig('web-2', 5174),
-    webConfig('web-ts-graphql', 5175)
+    webConfig('web-ts-graphql', 5175),
+    webConfig('web-style-guide', 5176)
   ]
 };
