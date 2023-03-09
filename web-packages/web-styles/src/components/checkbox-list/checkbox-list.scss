@@ -1,0 +1,13 @@
+@use '../../variables/sizing' as sizing;
+
+.checkbox-list {
+  .inner-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .checkbox {
+    margin-top: sizing.$space-s;
+  }
+}

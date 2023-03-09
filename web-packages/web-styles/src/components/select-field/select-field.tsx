@@ -17,7 +17,7 @@ interface SelectFieldProps {
   notes?: string;
   required?: boolean;
   validated?: boolean;
-};
+}
 
 export default function Select({
   children,

@@ -16,7 +16,6 @@
 }
 
 @mixin hover-and-active {
-
   @include hover {
     @content;
   }
@@ -35,7 +34,7 @@
     @include hover {
       @content;
     }
-  
+
     @include active {
       @content;
     }

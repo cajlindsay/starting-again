@@ -1,11 +1,11 @@
 @mixin non-touch-only {
-  body:not(.touch-only) & {  
-    @content;  
-  }  
-} 
+  body:not(.touch-only) & {
+    @content;
+  }
+}
 
 @mixin touch-only {
-  body.touch-only & {  
-    @content;  
-  }  
-} 
+  body.touch-only & {
+    @content;
+  }
+}

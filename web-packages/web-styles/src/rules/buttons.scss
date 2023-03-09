@@ -6,7 +6,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
+
   text-decoration: none;
 
   cursor: pointer;
@@ -18,7 +18,7 @@
   appearance: none;
   user-select: none;
 
-  border-radius: sizing.$radius-m;  
+  border-radius: sizing.$radius-m;
 
   @include states.hover-and-active {
     text-decoration: none;
@@ -87,7 +87,7 @@
   height: 36px;
   padding: 0 24px;
   font-size: 0.8em;
-  line-height: 1em; 
+  line-height: 1em;
 }
 
 // *basic classes

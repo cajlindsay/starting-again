@@ -15,7 +15,7 @@ interface FormFieldProps {
   validated?: boolean;
 }
 
-export default function FormField ({
+export default function FormField({
   children,
   className = '',
   disabled = false,
@@ -25,22 +25,16 @@ export default function FormField ({
   validated = false,
   required = false
 }: FormFieldProps) {
-  const [
-    hasFocus,
-    setHasFocus
-  ] = useState(false);
+  const [hasFocus, setHasFocus] = useState(false);
 
   return (
-    <div className={classNames(
-      className,
-      'form-field',
-      {
+    <div
+      className={classNames(className, 'form-field', {
         'has-error': error,
         'has-focus': hasFocus,
         validated,
         disabled
-      }
-    )}
+      })}
     >
       <label>
         {React.cloneElement(children, {
@@ -53,11 +47,9 @@ export default function FormField ({
         />
       </label>
 
-      {error && (
-        <p className="error-message">{error}</p>)}
-        
-      {notes && (    
-        <p className="notes">{notes}</p>)}
+      {error && <p className="error-message">{error}</p>}
+
+      {notes && <p className="notes">{notes}</p>}
     </div>
   );
-};
+}

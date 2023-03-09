@@ -5,13 +5,10 @@
   function-parentheses-space-inside 
 */
 $gradient-primary-grad01: radial-gradient(
-  148.56% 105.98% at 0% 100%, 
+  148.56% 105.98% at 0% 100%,
   colors.$secondary 0%,
   colors.$primary 49.48%,
-  colors.$primary-alt01 100%);
-
-$gradient-warm-linear: linear-gradient(
-  colors.$secondary, 
-  colors.$primary, 
-  colors.$primary-alt01
+  colors.$primary-alt01 100%
 );
+
+$gradient-warm-linear: linear-gradient(colors.$secondary, colors.$primary, colors.$primary-alt01);

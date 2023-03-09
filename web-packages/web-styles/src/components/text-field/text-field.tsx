@@ -10,9 +10,9 @@ interface TextFieldProps {
   placeholder?: string;
   type?: 'text' | 'email' | 'password' | 'number';
   value: string | number;
-  min?: number,
-  step?: number,
-  autoComplete?: string,
+  min?: number;
+  step?: number;
+  autoComplete?: string;
   error?: string;
   label: string;
   notes?: string;

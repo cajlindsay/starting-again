@@ -65,8 +65,8 @@ export const Lists: Story = () => (
 );
 
 export const Quotes: Story = () => (
-    <q>
-      This is a quote, and it goes something like this...Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Curabitur suscipit convallis magna sed dapibus.
-    </q>
+  <q>
+    This is a quote, and it goes something like this...Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Curabitur suscipit convallis magna sed dapibus.
+  </q>
 );

@@ -16,9 +16,18 @@ export default function App() {
           <NavLink to="/route-2">Route 2</NavLink>
         </div>
         <Routes>
-          <Route path="/route-1" element={<Route1 />} />
-          <Route path="/route-2" element={<Route2 />} />
-          <Route path="*" element={<Redirect />} />
+          <Route
+            path="/route-1"
+            element={<Route1 />}
+          />
+          <Route
+            path="/route-2"
+            element={<Route2 />}
+          />
+          <Route
+            path="*"
+            element={<Redirect />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
@@ -26,13 +35,11 @@ export default function App() {
 }
 
 function Redirect() {
-  return <Navigate to="/route-1" />
+  return <Navigate to="/route-1" />;
 }
 
 function Route1() {
-  return (
-    <div>Route 1</div>
-  );
+  return <div>Route 1</div>;
 }
 
 function Route2() {

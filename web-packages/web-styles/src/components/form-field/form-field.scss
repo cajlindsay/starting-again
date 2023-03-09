@@ -47,18 +47,20 @@
     color: colors.$error;
   }
 
-  &.has-error.has-error { // Double up the css class to increase specifity
+  &.has-error.has-error {
+    // Double up the css class to increase specifity
     .bordered-control {
       border-color: colors.$error;
       box-shadow: none;
     }
   }
 
-  &.validated.validated { // Double up the css class to increase specifity
+  &.validated.validated {
+    // Double up the css class to increase specifity
     .bordered-control {
       border-color: colors.$success;
       box-shadow: none;
-    } 
+    }
   }
 
   &.has-focus {
@@ -75,7 +77,7 @@
     .notes {
       color: colors.$tertiary-200;
     }
-  }   
+  }
 
   > label {
     display: flex;

@@ -116,7 +116,7 @@ p,
   color: colors.$primary;
   cursor: pointer;
   text-decoration: none;
-  
+
   @include states.hover-and-active {
     border-bottom: 2px solid colors.$primary-400;
     color: colors.$primary-400;
