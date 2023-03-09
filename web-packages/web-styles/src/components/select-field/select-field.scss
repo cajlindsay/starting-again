@@ -1,0 +1,28 @@
+@use '../../variables/color-palette' as colors;
+@use '../../variables/sizing' as sizing;
+
+.select-field.form-field {
+  $background-icon: url('../../icons/chevron-down.svg');
+
+  select {
+    background-image: $background-icon, linear-gradient(colors.$tertiary-200, colors.$tertiary-200);;
+    background-repeat: no-repeat;
+    background-size: 22px 22px, 1px sizing.$control-height-m;
+    background-position: right 10px center, top right sizing.$control-height-m;
+  
+    cursor: default;
+    padding: 0 sizing.$control-height-m 0 sizing.$space-m;
+  }
+
+  &.has-error.has-error { // Double up the css class to increase specifity
+    .bordered-control {
+      background-image: $background-icon, linear-gradient(colors.$error, colors.$error);
+    }
+  }
+
+  &.validated.validated { // Double up the css class to increase specifity
+    .bordered-control {
+      background-image: $background-icon, linear-gradient(colors.$success, colors.$success);
+    } 
+  }
+}

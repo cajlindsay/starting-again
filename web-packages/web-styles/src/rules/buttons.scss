@@ -1,5 +1,6 @@
 @use '../variables/color-palette' as colors;
 @use '../mixins/states' as states;
+@use '../variables/sizing' as sizing;
 
 %base {
   display: inline-flex;
@@ -16,6 +17,8 @@
   transition: 100ms linear background-color, 100ms linear color, 100ms linear border-color, 100ms linear box-shadow;
   appearance: none;
   user-select: none;
+
+  border-radius: sizing.$radius-m;  
 
   @include states.hover-and-active {
     text-decoration: none;
@@ -69,31 +72,22 @@
 %size-standard {
   height: 60px;
   padding: 0 30px;
-
-  font-size: 16px;
+  font-size: 1em;
   line-height: 1em;
-
-  border-radius: 30px;  
 }
 
 %size-medium {
   height: 44px;
   padding: 0 24px;
-
-  font-size: 14px;
+  font-size: 0.9em;
   line-height: 1em;
-
-  border-radius: 30px;  
 }
 
 %size-small {
   height: 36px;
   padding: 0 24px;
-
-  font-size: 14px;
-  line-height: 1em;
-
-  border-radius: 30px;  
+  font-size: 0.8em;
+  line-height: 1em; 
 }
 
 // *basic classes

@@ -1,11 +1,12 @@
 @use '../variables/color-palette' as colors;
+@use '../variables/sizing' as sizing;
 
-.card-1 {
+.card-primary {
   background-color: colors.$primary;
-  border-radius: 20px;
+  border-radius: sizing.$radius-m;
 }
 
-.gradient-card-1 {
+.card-gradient-primary {
   background: radial-gradient(148.56% 105.98% at 0% 100%, #ffcd00 0%, #faa613 24.98%, #f58025 49.48%, #f37126 76.92%, rgba(242, 101, 38, 0.9) 100%);
-  border-radius: 20px;
+  border-radius: sizing.$radius-m;
 }

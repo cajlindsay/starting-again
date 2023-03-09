@@ -2,7 +2,7 @@ import React from 'react';
 import type { Story } from '@ladle/react';
 import { ButtonTabsComponent, ButtonTabPanel, ButtonTabBar, ButtonTab, ButtonTabPanels } from './button-tabs';
 
-export const TabsWithComponents: Story = () => {
+export const WithComponents: Story = () => {
   return (
     <ButtonTabsComponent startTabId={1}>
       <ButtonTabBar>

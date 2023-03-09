@@ -1,0 +1,9 @@
+@use './color-palette.scss' as colors;
+
+$border-1: 1px solid colors.$tertiary-300;
+
+$shadow-color: rgba(0, 0, 0, 0.3);
+$shadow-xs: 0 1px 4px 0 $shadow-color;
+$shadow-s: 0 2px 8px 0 $shadow-color;
+$shadow-m: 0 3px 12px 0 $shadow-color;
+$shadow-l: 0 4px 16px 0 $shadow-color;

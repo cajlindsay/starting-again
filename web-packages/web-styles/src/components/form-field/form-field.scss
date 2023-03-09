@@ -1,0 +1,84 @@
+@use '../../variables/color-palette.scss' as colors;
+@use '../../variables/borders.scss' as borders;
+@use '../../variables/sizing' as sizing;
+
+.form-field {
+  display: block;
+  margin-top: sizing.$space-xxl;
+
+  .bordered-control {
+    background-color: colors.$neutral-white;
+    border: borders.$border-1;
+    border-radius: sizing.$radius-m;
+  }
+
+  .input-control {
+    appearance: none;
+    color: colors.$tertiary;
+    font-size: 1.25rem;
+    height: sizing.$control-height-m;
+    line-height: 1em;
+    margin-top: sizing.$space-s;
+    padding: 0 sizing.$space-m;
+
+    &::placeholder,
+    .placeholder {
+      color: colors.$tertiary-300;
+    }
+  }
+
+  .notes,
+  .error-message {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1rem;
+    margin-left: sizing.$space-m;
+    margin-top: sizing.$space-s;
+    transition: 150ms linear color;
+    user-select: none;
+  }
+
+  .notes {
+    color: colors.$tertiary;
+  }
+
+  .error-message {
+    color: colors.$error;
+  }
+
+  &.has-error.has-error { // Double up the css class to increase specifity
+    .bordered-control {
+      border-color: colors.$error;
+      box-shadow: none;
+    }
+  }
+
+  &.validated.validated { // Double up the css class to increase specifity
+    .bordered-control {
+      border-color: colors.$success;
+      box-shadow: none;
+    } 
+  }
+
+  &.has-focus {
+    > label {
+      > .label {
+        color: colors.$tertiary-100;
+      }
+    }
+
+    .bordered-control:not(.ignore-focus) {
+      box-shadow: borders.$shadow-xs;
+    }
+
+    .notes {
+      color: colors.$tertiary-200;
+    }
+  }   
+
+  > label {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}

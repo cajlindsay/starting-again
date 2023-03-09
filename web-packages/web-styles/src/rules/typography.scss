@@ -1,50 +1,151 @@
-@use '../mixins/states' as states;
 @use '../variables/color-palette' as colors;
+@use '../variables/sizing' as sizing;
+@use '../mixins/states' as states;
 
-h1 {
-  font-size: 64px;
+%all-typography {
+  color: colors.$tertiary;
+  font-weight: normal;
   line-height: 1em;
+}
+
+// Headings
+%heading {
+  @extend %all-typography;
+  font-weight: normal;
+  letter-spacing: 0;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+.heading-xxl {
+  @extend %heading;
+  font-size: 2.75rem;
   letter-spacing: -2px;
 }
 
-h3 {
-  font-size: 32px;
-  line-height: 1em;
+h2,
+.heading-xl {
+  @extend %heading;
+  font-size: 2.5rem;
+  letter-spacing: -1.75px;
+}
+
+h3,
+.heading-l {
+  @extend %heading;
+  font-size: 2.25rem;
+  letter-spacing: -1.5px;
+}
+
+h4,
+.heading-m {
+  @extend %heading;
+  font-size: 2rem;
+  letter-spacing: -1.25px;
+}
+
+h5,
+.heading-s {
+  @extend %heading;
+  font-size: 1.75rem;
   letter-spacing: -1px;
 }
 
-h4 {
-  font-size: 24px;
-  line-height: 32px;
+h6,
+.heading-xs {
+  @extend %heading;
+  font-size: 1.5rem;
+  letter-spacing: -0.75px;
 }
 
-h5 {
-  font-size: 18px;
-  line-height: 24px;
+// Quote
+q,
+.quote {
+  border-left: sizing.$space-m solid colors.$neutral-dark-400;
+  display: block;
+  font-size: 1.5rem;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.875rem;
+  padding-left: sizing.$space-xl;
+  margin-top: sizing.$space-m;
 }
 
-a,
-a:disabled,
-a:visited {
-  color: initial;
+// Caption
+caption,
+.caption {
+  @extend %all-typography;
+  display: block;
+  font-size: 0.75rem;
+  margin-top: sizing.$space-m;
+}
+
+// Paragraphs
+.paragraph-l {
+  @extend %all-typography;
+  font-size: 1.25rem;
+  line-height: 1em;
   text-decoration: none;
+  margin-top: sizing.$space-m;
+}
 
+p,
+.paragraph-m {
+  @extend %all-typography;
+  font-size: 1rem;
+  line-height: 1em;
+  text-decoration: none;
+  margin-top: sizing.$space-m;
+}
+
+.paragraph-s {
+  @extend %all-typography;
+  font-size: 0.8125rem;
+  line-height: 1em;
+  text-decoration: none;
+  margin-top: sizing.$space-m;
+}
+
+// Hyperlink
+.hyperlink,
+.hyperlink:disabled,
+.hyperlink:visited {
+  border-bottom: 2px solid colors.$primary;
+  color: colors.$primary;
   cursor: pointer;
-
+  text-decoration: none;
+  
   @include states.hover-and-active {
-    color: colors.$primary;
+    border-bottom: 2px solid colors.$primary-400;
+    color: colors.$primary-400;
   }
 }
 
-p {
-  a,
-  a:disabled,
-  a:visited {
-    color: colors.$primary;
-    text-decoration: underline;
+// Lists
+.ordered-list,
+ol.list {
+  @extend %all-typography;
+  font-size: 1.25rem;
+  line-height: 1em;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  margin-top: sizing.$space-m;
 
-    @include states.hover-and-active {
-      color: colors.$primary-alt01;
-    }
+  li {
+    list-style-type: decimal;
   }
+}
+
+.unordered-list,
+ul.list {
+  @extend %all-typography;
+  font-size: 1.25rem;
+  line-height: 1em;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  margin-top: sizing.$space-m;
 }

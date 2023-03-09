@@ -1,0 +1,15 @@
+@use '../../variables/color-palette' as colors;
+@use '../../variables/sizing' as sizing;
+
+.label {
+  align-items: center;
+  color: colors.$tertiary-200;
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  justify-content: space-between;
+  line-height: 1em;
+  margin: 0 sizing.$space-m;
+  transition: 150ms linear color;
+  user-select: none;
+}

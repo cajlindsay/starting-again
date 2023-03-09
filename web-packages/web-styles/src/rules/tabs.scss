@@ -1,74 +1,57 @@
-@use './buttons';
 @use '../mixins/states' as states;
 @use '../variables/color-palette' as colors;
+@use '../variables/sizing' as sizing;
+@use '../variables/borders.scss' as borders;
 
-.tabs {
+.tab-bar {
   display: flex;
+  padding-left: sizing.$space-m;
 
   > a,
   > button,
   > .tab {
-    @extend %style-primary;
-    
-    height: 48px;
-    margin-right: 5px;
+    appearance: none;
+    background-color: white;
+    border: borders.$border-1;
+    border-radius: sizing.$radius-m sizing.$radius-m 0 0;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: sizing.$space-xs;
+    padding: sizing.$space-m sizing.$space-l;
+    text-decoration: none;
+    transition: 150ms ease-in-out background-color, opacity;
 
-    color: colors.$primary !important;
-    font-size: 18px;
-
-    background-color: transparent;
-    border-color: transparent;
-    border-width: 1px;
-  
-    &:disabled {
+    @include states.disabled {
       color: colors.$tertiary-300 !important;
-  
-      background-color: transparent !important;
-      border-color: transparent !important;
+    }
+
+    @include states.hover {
+      color: colors.$primary !important;
+    }
+
+    @include states.active {
+      color: colors.$primary !important;
+      z-index: 1;
+      border-bottom: 0;
+
+      @include states.hover {
+        color: colors.$primary !important;
+      }
     }
   }
+}
 
-  &.active-full {
-    > a,
-    > button,
-    > .tab {    
-      @include states.hover {  
-        border-color: colors.$primary;
-      }
-  
-      @include states.active {
-        color: colors.$primary-300 !important;
-    
-        background-color: colors.$primary;
-        border-color: colors.$primary;
-  
-        @include states.hover { 
-          color: colors.$primary-300 !important;
-    
-          background-color: colors.$primary-alt01;
-          border-color: colors.$primary-alt01;
-        }
-      }
-    }
-  } 
+.tab-panels {
+  overflow: auto;
+  padding: sizing.$space-m;
+  border: 1px solid colors.$tertiary-300;
+  border-radius: sizing.$radius-m;
+  background-color: white;
+  margin-top: -1px;
+  z-index: 2;
 
-  &.active-hollow {
-    > a,
-    > button,
-    > .tab {    
-      @include states.hover {
-        border-color: colors.$primary;
-      }
-  
-      @include states.active {  
-        border-color: colors.$primary;
-  
-        @include states.hover {
-          color: colors.$primary-alt01;
-          
-          border-color: colors.$primary-alt01;
-        }
-      }
-    }
-  } 
+  > :not(.active) {
+    display: none;
+  }
 }
