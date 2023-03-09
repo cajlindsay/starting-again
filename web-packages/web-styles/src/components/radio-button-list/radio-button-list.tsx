@@ -1,17 +1,17 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import isEqual from 'lodash/isEqual';
 
 import FormField from '../form-field/form-field';
-import { CheckboxValueType } from '../checkbox/checkbox';
+import { RadioButtonValueType } from '../radio-button/radio-button';
 
-import './checkbox-list.scss';
+import './radio-button-list.scss';
 
-interface CheckboxListProps {
+interface RadioButtonListProps {
   children: React.ReactElement[];
   className?: string;
-  onChange: (val: CheckboxValueType[]) => void;
-  value: CheckboxValueType[];
+  onChange: (val: RadioButtonValueType) => void;
+  value: RadioButtonValueType;
   disabled?: boolean;
   error?: string;
   label: string;
@@ -20,7 +20,7 @@ interface CheckboxListProps {
   validated?: boolean;
 }
 
-export default function CheckboxList({
+export default function RadioButtonList({
   children,
   className,
   onChange,
@@ -31,23 +31,10 @@ export default function CheckboxList({
   notes,
   required = false,
   validated = false
-}: CheckboxListProps) {
-  const onControlChange = useCallback(
-    (checkboxValue: CheckboxValueType, checked: boolean) => {
-      const i = value.indexOf(checkboxValue);
-
-      if (i === -1 && checked) {
-        onChange([...value, checkboxValue]);
-      } else if (i > -1 && !checked) {
-        onChange([...value.slice(0, i), ...value.slice(i + 1)]);
-      }
-    },
-    [onChange, value]
-  );
-
+}: RadioButtonListProps) {
   return (
     <FormField
-      className={classnames(className, 'checkbox-list')}
+      className={classnames(className, 'radio-button-list')}
       disabled={disabled}
       error={error}
       label={label}
@@ -61,9 +48,9 @@ export default function CheckboxList({
           (child) =>
             child &&
             React.cloneElement(child, {
-              checked: value.findIndex((v) => isEqual(v, child.props.value)) > -1,
+              checked: isEqual(value, child.props.value),
               disabled,
-              onChange: onControlChange
+              onChange
             })
         )}
       </div>

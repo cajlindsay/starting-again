@@ -1,0 +1,13 @@
+@use '../../variables/sizing' as sizing;
+
+.radio-button-list {
+  .inner-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .radio-button {
+    margin-top: sizing.$space-s;
+  }
+}

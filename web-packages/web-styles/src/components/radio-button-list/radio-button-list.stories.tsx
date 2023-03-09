@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import type { Story } from '@ladle/react';
 
-import CheckboxList from './checkbox-list';
-import Checkbox, { CheckboxValueType } from '../checkbox/checkbox';
+import RadioButtonList from './radio-button-list';
+import Checkbox, { RadioButtonValueType } from '../radio-button/radio-button';
 
 export const BasicExample: Story = () => {
-  const [val, setVal] = useState<CheckboxValueType[]>(['cats', 'clouds']);
+  const [val, setVal] = useState<RadioButtonValueType>('cats');
 
   return (
-    <CheckboxList
-      label="My favorite things"
+    <RadioButtonList
+      label="My favorite thing"
       value={val}
       onChange={setVal}
     >
@@ -26,9 +26,9 @@ export const BasicExample: Story = () => {
         value="clouds"
       />
       <Checkbox
-        label="Other things"
+        label="Something else"
         value="other"
       />
-    </CheckboxList>
+    </RadioButtonList>
   );
 };

@@ -1,0 +1,53 @@
+@use '../../variables/color-palette.scss' as colors;
+@use '../../variables/sizing' as sizing;
+@use '../../variables/borders' as borders;
+
+.radio-button {
+  $circle-size: 30px;
+  $inner-circle-size: $circle-size * 0.55;
+
+  align-items: center;
+  display: flex;
+
+  .label {
+    margin: 0;
+  }
+
+  .outer-circle {
+    background-color: colors.$neutral-white;
+    border-radius: 50%;
+    display: flex;
+    height: $circle-size;
+    margin-right: sizing.$space-m;
+    width: $circle-size;
+  }
+
+  .inner-circle {
+    $size: $inner-circle-size;
+    background-color: colors.$primary;
+    border-radius: 50%;
+    display: none;
+    height: $size;
+    margin: auto;
+    width: $size;
+  }
+
+  input {
+    opacity: 0;
+    position: absolute;
+
+    &:checked {
+      + .outer-circle {
+        box-shadow: borders.$shadow-xs;
+      }
+
+      + .outer-circle .inner-circle {
+        display: block;
+      }
+
+      ~ .label {
+        color: colors.$tertiary-100;
+      }
+    }
+  }
+}

@@ -3,22 +3,22 @@ import classnames from 'classnames';
 
 import Label from '../label/label';
 
-import './checkbox.scss';
+import './radio-button.scss';
 
-export type CheckboxValueType = string | number;
+export type RadioButtonValueType = string | number;
 
-interface CheckboxProps {
+interface RadioButtonProps {
   checked?: boolean;
   className?: string;
   disabled?: boolean;
   label: string;
   onBlur?: () => void;
-  onChange?: (val: CheckboxValueType, checked: boolean) => void;
+  onChange?: (val: RadioButtonValueType) => void;
   onFocus?: () => void;
-  value?: CheckboxValueType;
+  value?: RadioButtonValueType;
 }
 
-export default function Checkbox({
+export default function RadioButton({
   checked,
   className,
   disabled = false,
@@ -27,19 +27,21 @@ export default function Checkbox({
   onChange,
   onFocus,
   value
-}: CheckboxProps) {
+}: RadioButtonProps) {
   return (
-    <label className={classnames(className, 'checkbox')}>
+    <label className={classnames(className, 'radio-button')}>
       <input
         checked={checked}
         disabled={disabled}
         onBlur={onBlur}
-        onChange={(e) => onChange(value, e.target.checked)}
+        onChange={() => onChange(value)}
         onFocus={onFocus}
-        type="checkbox"
+        type="radio"
         value={value}
       />
-      <span className="checkbox-square bordered-control ignore-focus" />
+      <span className="outer-circle bordered-control ignore-focus">
+        <span className="inner-circle" />
+      </span>
       <Label label={label} />
     </label>
   );
