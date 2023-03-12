@@ -6,6 +6,7 @@ global
 - DONE run all with pm2 locally
 - DONE debugging with integrated debugger inside running docker container
 - DONE run all on minikube or some sort of alternative
+- database read write etc...
 
 infrastructure
 
@@ -24,11 +25,11 @@ web
 - DONE scss and linting
 - redux
 - IN PROGRESS graphql
-- typescript
+- DONE typescript
 - vue
 - angular
-- styles
-- routing
+- IN PROGRESS styles
+- DONE routing
 - DONE visual snapshot testing
 - DONE authentication
 - DONE change prod builds to use environment variables rather than vite's environment variables
