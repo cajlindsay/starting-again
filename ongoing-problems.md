@@ -36,3 +36,19 @@ Attempt 5: node-dev
 2. Use node-dev called from pm2 config for dev; use esbuild to build production package.
 
 SOLVED: Attempt 5 is the best trade off for now.
+
+# Issues with wsl network connectivity
+The following commands can resolve alot of common problems:
+```
+echo -e "[network]\ngenerateResolvConf = false" | sudo tee -a /etc/wsl.conf
+sudo unlink /etc/resolv.conf
+echo nameserver 1.1.1.1 | sudo tee /etc/resolv.conf
+```
+
+# Issues with wsl and docker desktop
+As an alternative I am trying to use docker installed in wsl, following instructions here:
+https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+You may also have to do this:
+```
+rm -rf /var/snap/docker/179/run/docker.pid
+```

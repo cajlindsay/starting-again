@@ -1,0 +1,78 @@
+version: "3.4"
+
+services:
+  db:
+    image: mongo:latest
+    restart: always
+    networks:
+      - webnet
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=B49B817164814B2BBDCCC0C5674BFDB3
+      - MONGO_INITDB_ROOT_PASSWORD=DBD2ED7937D44982A483243E1C49995E95F147A3F0A94997A13288A9C6F7377DB4E1BFAAACB44F2285517816A8222B576
+
+  api-1:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        app: api-1
+    image: api-1
+    #volumes:
+    #  - ../:/app
+    environment:
+      - PORT=3000
+      - MSAL_TENANT_URL=https://login.microsoftonline.com/consumers
+      - MSAL_CLIENT_ID=ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
+      - MSAL_CLIENT_SECRET=HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp
+      - MONGO_INITDB_ROOT_USERNAME=B49B817164814B2BBDCCC0C5674BFDB3
+      - MONGO_INITDB_ROOT_PASSWORD=DBD2ED7937D44982A483243E1C49995E95F147A3F0A94997A13288A9C6F7377DB4E1BFAAACB44F2285517816A8222B576
+      - MONGO_DATABASE=starting-again
+      - MONGO_SERVER=db
+      - MONGO_PORT=27017
+    depends_on:
+      - db
+    networks:
+      - webnet
+    ports:
+      - 3000:3000
+    #command: npx node-dev -r dotenv/config src/server.js
+    #command: tail -f /dev/null
+  web-1:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        app: web-1
+    image: web-1
+    #volumes:
+    #  - ../../:/app
+    environment:
+      - PORT=5173
+      - VITE_API_URL=http://localhost
+      - VITE_MSAL_CLIENT_ID=ef0f1a58-5d27-48f4-a47d-043df4ea4c3f
+      - VITE_MSAL_AUTHORITY=https://login.microsoftonline.com/consumers
+    depends_on:
+      - db
+      - api-1
+    networks:
+      - webnet
+    ports:
+      - 5173:5173
+    #command: npx vite --config ../../_config-vite/vite.web.config.js
+
+  ingress:
+    image: nginx:1.23.3-alpine
+    depends_on:
+      - api-1
+      - web-1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - webnet
+networks:
+  webnet:

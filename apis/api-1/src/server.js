@@ -4,7 +4,7 @@ import foo from '@starting-again/package-1/src/module-1.js';
 import routes1 from './routes-1.js';
 
 const app = express();
-
+app.use(express.json());
 app.use(authenticate);
 
 app.get('/', (req, res) => {

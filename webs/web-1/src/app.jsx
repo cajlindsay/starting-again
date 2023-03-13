@@ -3,6 +3,7 @@ import { BrowserRouter, NavLink, Route, Navigate, Routes } from 'react-router-do
 
 import { logOut } from '@starting-again/web-common/src/auth';
 import apiClient from '@starting-again/web-common/src/api-client.js';
+import CarsList from './cars';
 
 import './app.scss';
 
@@ -14,6 +15,7 @@ export default function App() {
         <div className="nav">
           <NavLink to="/route-1">Route 1</NavLink>
           <NavLink to="/route-2">Route 2</NavLink>
+          <NavLink to="/cars">Cars</NavLink>
         </div>
         <Routes>
           <Route
@@ -23,6 +25,10 @@ export default function App() {
           <Route
             path="/route-2"
             element={<Route2 />}
+          />
+          <Route
+            path="/cars"
+            element={<CarsList />}
           />
           <Route
             path="*"
@@ -46,7 +52,7 @@ function Route2() {
   const [data, setData] = useState();
 
   const onCallAPI1 = useCallback(async () => {
-    const response = await apiClient.get('/api-1');
+    const response = await apiClient.get('/api-1/routes-1/cars');
     setData(response.data);
   }, []);
 
