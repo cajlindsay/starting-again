@@ -6,7 +6,7 @@ global
 - DONE run all with pm2 locally
 - DONE debugging with integrated debugger inside running docker container
 - DONE run all on minikube or some sort of alternative
-- database read write etc...
+- DONE database read write etc...
 
 infrastructure
 
