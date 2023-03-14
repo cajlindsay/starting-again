@@ -27,6 +27,7 @@ export default function CarsList() {
     await apiClient.post('/api-1/routes-1/cars', form);
     const { data } = await apiClient.get('/api-1/routes-1/cars');
     setCars(data);
+    setForm(defaultForm);
   }, [form]);
 
   return (
@@ -42,16 +43,20 @@ export default function CarsList() {
         <label>
           <span>Make</span>
           <input
+            className='make-input'
             type="text"
             onChange={(e) => setForm({ ...form, make: e.target.value })}
+            value={form.make}
           />
         </label>
 
         <label>
           <span>Model</span>
           <input
+            className='model-input'
             type="text"
             onChange={(e) => setForm({ ...form, model: e.target.value })}
+            value={form.model}
           />
         </label>
 
