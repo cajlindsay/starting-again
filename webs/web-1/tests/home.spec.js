@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 
 test('matches snapshot', async ({ page }) => {
-  await page.goto('./');
+  await page.goto('./route-2');
   expect(await page.screenshot()).toMatchSnapshot();
 });
 
@@ -14,7 +14,7 @@ test('click api 1', async ({ page }) => {
     await route.fulfill({ json });
   });
 
-  await page.goto('./');
+  await page.goto('./route-2');
   await page.click('button:has-text("API 1")');
   expect(await page.screenshot()).toMatchSnapshot();
 });
@@ -27,7 +27,7 @@ test('click api 2', async ({ page }) => {
     await route.fulfill({ json });
   });
 
-  await page.goto('./');
+  await page.goto('./route-2');
   await page.click('button:has-text("API 2")');
   expect(await page.screenshot()).toMatchSnapshot();
 });

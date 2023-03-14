@@ -52,7 +52,7 @@ function Route2() {
   const [data, setData] = useState();
 
   const onCallAPI1 = useCallback(async () => {
-    const response = await apiClient.get('/api-1/routes-1/cars');
+    const response = await apiClient.get('/api-1');
     setData(response.data);
   }, []);
 
