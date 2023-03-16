@@ -16,6 +16,18 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: api-mongo-config
+  namespace: starting-again
+data:
+  MONGO_INITDB_ROOT_USERNAME: B49B817164814B2BBDCCC0C5674BFDB3
+  MONGO_INITDB_ROOT_PASSWORD: DBD2ED7937D44982A483243E1C49995E95F147A3F0A94997A13288A9C6F7377DB4E1BFAAACB44F2285517816A8222B576
+  MONGO_DATABASE: starting-again
+  MONGO_SERVER: mongodb
+  MONGO_PORT: '27017'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: web-msal-config
   namespace: starting-again
 data:
@@ -52,7 +64,7 @@ spec:
     organizationalUnits:
       - Devops
   dnsNames:
-    - '*.starting-again.info'
+    - "*.starting-again.info"
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -69,16 +81,17 @@ metadata:
   name: qpp-ingress
   namespace: starting-again
   annotations:
-    nginx.ingress.kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.ingress.kubernetes.io/enable-cors: 'true'
-    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
-    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
-    nginx.ingress.kubernetes.io/ingress.allow-http: 'true'
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ingress.allow-http: "true"
 spec:
   tls:
     - hosts:
-        - '*.atarting-again.info'
+        - "*.atarting-again.info"
       secretName: ingress-tls-secret
 
   rules:
@@ -92,21 +105,21 @@ spec:
                 name: noop
                 port:
                   number: 3000
-          - path: /api-1
+          - path: /api-1/?(.*)
             pathType: Prefix
             backend:
               service:
                 name: api-1
                 port:
                   number: 3000
-          - path: /api-2
+          - path: /api-2/?(.*)
             pathType: Prefix
             backend:
               service:
                 name: api-2
                 port:
                   number: 3000
-          - path: /graphql-server
+          - path: /graphql-server/?(.*)
             pathType: Prefix
             backend:
               service:
@@ -170,6 +183,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: api-msal-config
+            - configMapRef:
+                name: api-mongo-config
 ---
 kind: Service
 apiVersion: v1
@@ -210,6 +225,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: api-msal-config
+            - configMapRef:
+                name: api-mongo-config
 ---
 kind: Service
 apiVersion: v1
@@ -327,9 +344,6 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 3000
-          envFrom:
-            - configMapRef:
-                name: api-msal-config
 ---
 kind: Service
 apiVersion: v1
@@ -410,6 +424,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: api-msal-config
+            - configMapRef:
+                name: api-mongo-config
 ---
 kind: Service
 apiVersion: v1
@@ -423,3 +439,43 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: starting-again
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - configMapRef:
+                name: api-mongo-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongodb
+  namespace: starting-again
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

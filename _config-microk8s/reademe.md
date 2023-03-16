@@ -74,63 +74,18 @@ the following lines. Note that the ip address will be the one that you found abo
 Registries are a pain in the arse so instead we can build images and export them to the microk8s internal registry. There are
 a few different web and api projects in this monorepo....you will need to build all of them.
 
-Run this script in the root of the monorepo to build a single api:
+Run this script in the root of the monorepo to build, publish and deploy a single api:
 
 ```
-./build-api.sh api-1
+./config_microk8s/build-publish-deploy-one-api.sh api-1
 ```
 
 or for single web:
 
 ```
-./build-web.sh web-1
+./config_microk8s/build-publish-deploy-one-web.sh web-1
 ```
 
-Note that whenever you build and push a new image, existing deployments will NOT automatically use the new image. You will
-need to delete existing pods first. This is normal with kubernetes.
-
-# Create/update resources
-
-Install cluster resources (services, deployments etc...):
-
+or to  build, publish and deploy everything:
 ```
-kubectl apply -f _config-microk8s/config.yml
-```
-
-# Trust the self-signed SSL certificate
-
-1. Navigate to https://web-1.starting-again.info. You will see a warning appear that the site is not secure. Click advanced and proceed to the website.
-2. In the address bar click the padlock icon and select the certificate (sometimes it will say 'certificate is invalid' or something).
-3. On the popup, click the details tab and click the export button. Save the file.
-4. In the browser, navigate to 'Settings > Privacy and Security > Security > Manage Device Certificates'.
-5. On the popup, click the 'Trusted Root Certification Authorities' tab.
-6. Click 'Import', then select the certificate file that you exported earlier. Follow the steps.
-7. Close and reopen the browser.
-8. Navigate to https://web-1.starting-again.info. You should no longer see an 'untrusted' error. You should also now be able to fully interact with the website.
-
-# Useful stuff
-
-Start microk8s:
-
-```
-sudo microk8s start
-```
-
-To view the dashboard:
-
-```
-microk8s dashboard-proxy
-```
-
-# tls
-
-Useful commands for working out why cert-manager is not issuing tls certificates:
-
-```
-kubectl get clusterissuer
-kubectl get certificaterequests
-kubectl get orders
-kubectl get certificates
-kubectl get challenges
-kubectl get secrets
-```
+./config_microk8s/ 
