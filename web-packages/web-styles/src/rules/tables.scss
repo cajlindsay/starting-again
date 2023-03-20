@@ -1,0 +1,78 @@
+@use '../variables/color-palette' as colors;
+@use '../variables/sizing' as sizing;
+@use '../variables/borders' as borders;
+@use '../mixins/states' as states;
+
+%primary-table {
+  border-collapse: 'collapse';
+  border-spacing: 0;
+  display: table;
+  font-size: 0.875rem;
+  width: 100%;
+
+  thead {
+    display: table-header-group;
+  }
+
+  tbody {
+    display: table-row-group;
+
+    tr {
+      @include states.hover-and-active {
+        background-color: colors.$tertiary-200;
+      }
+
+      &.active {
+        background-color: colors.$tertiary-200;
+      }
+    }
+  }
+
+  tr {
+    background-color: transparent;
+    color: inherit;
+    display: table-row;
+    height: sizing.$space-xxl;
+    transition: 150ms ease-in-out background-color;
+    vertical-align: middle;
+
+    &.selected {
+      background-color: colors.$tertiary-200;
+    }
+  }
+
+  td,
+  th {
+    border-bottom: borders.$border-1;
+    display: table-cell;
+    padding: sizing.$space-s;
+    text-align: left;
+    vertical-align: inherit;
+  }
+
+  td {
+    cursor: pointer;
+  }
+
+  th {
+    font-size: 1.1rem;
+    font-weight: bold;
+    user-select: none;
+  }
+}
+
+%striped-table {
+  @extend %primary-table;
+
+  tbody tr:nth-child(even) {
+    background-color: colors.$tertiary-300;
+  }
+}
+
+.primary-table {
+  @extend %primary-table;
+}
+
+.striped-table {
+  @extend %striped-table;
+}

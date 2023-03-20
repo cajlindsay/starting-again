@@ -29,18 +29,24 @@ export default defineConfig({
     [
       'html',
       {
-        open: 'never',
+        // when developing locally open the report in a browser if at least one test fails
+        open: process.env.CI ? 'never' : 'on-failure',
         // drop report output to .playwright-report subfolder in project being tested
-        outputFolder: path.join(process.cwd(), '.playwright-report')
+        outputFolder: path.join(process.cwd(), '.playwright-report'),
+        // set host to 0.0.0.0 so that it can serve the report outside of the docker container
+        host: '0.0.0.0'
       }
     ]
   ],
   use: {
+    // set base url for page navigation in tests so don't have to give full url every time
+    baseURL,
     // collect trace when retrying the failed test
     trace: 'on-first-retry',
     // take screenshot if one doesn't exist
     screenshot: 'only-on-failure',
-    baseURL
+    // ensure screenshots are all the same size
+    viewport: { width: 1280, height: 720 }
   },
 
   // configure projects for browsers under test
@@ -48,11 +54,10 @@ export default defineConfig({
     {
       name: 'Google Chrome',
       use: {
-        channel: 'chrome'
+        browserName: 'chromium'
       }
     }
   ],
-
   // run local dev server before starting the tests
   webServer: {
     // start the web server

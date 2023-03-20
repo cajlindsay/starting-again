@@ -65,7 +65,7 @@ export default function CarsList() {
           value="Submit"
         />
       </form>
-      <table>
+      <table className="primary-table">
         <thead>
           <tr>
             <th>Make</th>

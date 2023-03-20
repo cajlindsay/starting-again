@@ -1,9 +1,6 @@
 # base image
 FROM node:19.4.0-alpine as build
 
-# args
-ARG app
-
 # create app directory
 RUN mkdir /app
 WORKDIR /app
