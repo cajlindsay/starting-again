@@ -1,12 +1,15 @@
 @use '../variables/color-palette' as colors;
 @use '../variables/fonts' as fonts;
 
+* {
+  outline: none !important;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-
   background-color: colors.$neutral-light;
 }
 
@@ -18,7 +21,6 @@ body * {
   line-height: 24px;
 }
 
-*,
 *:focus {
   outline: none !important;
 }

@@ -13,7 +13,8 @@
     "stop": "pm2 stop pm2.config.cjs",
     "kill": "pm2 delete pm2.config.cjs",
     "monitor": "pm2 monit",
-    "pw": "playwright"
+    "pw": "playwright",
+    "tt": "docker run -p 9229:9229 -v .:/app -w /app/webs/web-1 playwright-testing npm run test:visual"
   },
   "dependencies": {
     "@azure/msal-browser": "2.33.0",
@@ -33,7 +34,7 @@
   },
   "devDependencies": {
     "@ladle/react": "2.10.1",
-    "@playwright/test": "1.30.0",
+    "@playwright/test": "1.31.0",
     "@storybook/builder-vite": "0.1.37",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
@@ -56,9 +57,9 @@
     "passport": "0.6.0",
     "pm2": "5.2.2",
     "prettier": "2.8.3",
-    "sass": "1.57.1",
-    "stylelint": "14.16.1",
-    "stylelint-config-standard-scss": "6.1.0",
+    "sass": "1.59.3",
+    "stylelint": "15.3.0",
+    "stylelint-config-standard-scss": "7.0.1",
     "typescript": "4.9.5",
     "vite": "4.0.4",
     "vitest": "0.28.2"

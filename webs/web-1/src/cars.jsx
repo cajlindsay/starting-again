@@ -43,7 +43,7 @@ export default function CarsList() {
         <label>
           <span>Make</span>
           <input
-            className='make-input'
+            className="make-input"
             type="text"
             onChange={(e) => setForm({ ...form, make: e.target.value })}
             value={form.make}
@@ -53,14 +53,17 @@ export default function CarsList() {
         <label>
           <span>Model</span>
           <input
-            className='model-input'
+            className="model-input"
             type="text"
             onChange={(e) => setForm({ ...form, model: e.target.value })}
             value={form.model}
           />
         </label>
 
-        <input type="submit" value="Submit" />
+        <input
+          type="submit"
+          value="Submit"
+        />
       </form>
       <table>
         <thead>

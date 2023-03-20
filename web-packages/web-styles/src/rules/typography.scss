@@ -11,6 +11,7 @@
 // Headings
 %heading {
   @extend %all-typography;
+
   font-weight: normal;
   letter-spacing: 0;
   user-select: none;
@@ -21,6 +22,7 @@
 h1,
 .heading-xxl {
   @extend %heading;
+
   font-size: 2.75rem;
   letter-spacing: -2px;
 }
@@ -28,6 +30,7 @@ h1,
 h2,
 .heading-xl {
   @extend %heading;
+
   font-size: 2.5rem;
   letter-spacing: -1.75px;
 }
@@ -35,6 +38,7 @@ h2,
 h3,
 .heading-l {
   @extend %heading;
+
   font-size: 2.25rem;
   letter-spacing: -1.5px;
 }
@@ -42,6 +46,7 @@ h3,
 h4,
 .heading-m {
   @extend %heading;
+
   font-size: 2rem;
   letter-spacing: -1.25px;
 }
@@ -49,6 +54,7 @@ h4,
 h5,
 .heading-s {
   @extend %heading;
+
   font-size: 1.75rem;
   letter-spacing: -1px;
 }
@@ -56,6 +62,7 @@ h5,
 h6,
 .heading-xs {
   @extend %heading;
+
   font-size: 1.5rem;
   letter-spacing: -0.75px;
 }
@@ -77,6 +84,7 @@ q,
 caption,
 .caption {
   @extend %all-typography;
+
   display: block;
   font-size: 0.75rem;
   margin-top: sizing.$space-m;
@@ -85,6 +93,7 @@ caption,
 // Paragraphs
 .paragraph-l {
   @extend %all-typography;
+
   font-size: 1.25rem;
   line-height: 1em;
   text-decoration: none;
@@ -94,6 +103,7 @@ caption,
 p,
 .paragraph-m {
   @extend %all-typography;
+
   font-size: 1rem;
   line-height: 1em;
   text-decoration: none;
@@ -102,6 +112,7 @@ p,
 
 .paragraph-s {
   @extend %all-typography;
+
   font-size: 0.8125rem;
   line-height: 1em;
   text-decoration: none;
@@ -127,6 +138,7 @@ p,
 .ordered-list,
 ol.list {
   @extend %all-typography;
+
   font-size: 1.25rem;
   line-height: 1em;
   text-decoration: none;
@@ -142,6 +154,7 @@ ol.list {
 .unordered-list,
 ul.list {
   @extend %all-typography;
+
   font-size: 1.25rem;
   line-height: 1em;
   text-decoration: none;

@@ -1,8 +1,8 @@
 @use './color-palette' as colors;
 
-/* stylelint-disable 
+/* stylelint-disable
   indentation,
-  function-parentheses-space-inside 
+  function-parentheses-space-inside
 */
 $gradient-primary-grad01: radial-gradient(
   148.56% 105.98% at 0% 100%,
@@ -10,5 +10,4 @@ $gradient-primary-grad01: radial-gradient(
   colors.$primary 49.48%,
   colors.$primary-alt01 100%
 );
-
 $gradient-warm-linear: linear-gradient(colors.$secondary, colors.$primary, colors.$primary-alt01);

@@ -6,18 +6,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   text-decoration: none;
-
   cursor: pointer;
   border: 1px solid transparent;
   outline: 0;
   outline: none;
-
   transition: 100ms linear background-color, 100ms linear color, 100ms linear border-color, 100ms linear box-shadow;
   appearance: none;
   user-select: none;
-
   border-radius: sizing.$radius-m;
 
   @include states.hover-and-active {
@@ -30,17 +26,15 @@
 
   &:focus {
     text-decoration: none;
-
     outline: none;
   }
 }
 
 %style-primary {
   color: colors.$neutral-white;
-
   background-color: colors.$primary;
   border-color: colors.$primary;
-  box-shadow: 0 0 24.4898px rgba(colors.$primary-alt01-400, 0.3);
+  box-shadow: 0 0 24.4898px rgb(colors.$primary-alt01-400 0.3);
 
   @include states.hover-and-active {
     background-color: colors.$primary-alt01;
@@ -55,10 +49,9 @@
 
 %style-secondary {
   color: colors.$tertiary;
-
   background-color: colors.$neutral-white;
   border: 0;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 24px rgb(0 0 0 / 15%);
 
   @include states.hover-and-active {
     color: colors.$primary-alt01;

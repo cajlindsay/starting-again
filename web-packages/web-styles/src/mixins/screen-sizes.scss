@@ -1,5 +1,5 @@
-//NOTE: no min-width for phone...we are going 'phone-first/mobile-first' so our default rules should
-//be for small screens
+// NOTE: no min-width for phone...we are going 'phone-first/mobile-first' so our default rules should
+// be for small screens
 $phone-min: 0;
 $large-phone-min: 375px;
 $phablet-min: 576px;
@@ -52,48 +52,6 @@ $x-large-desktop-min: 1600px;
 
 @mixin phone-only {
   @media (max-width: $phablet-min) {
-    @content;
-  }
-}
-
-@mixin tablet-max {
-  @media (max-width: $tablet-min - 1) {
-    @content;
-  }
-}
-
-@mixin desktop-max {
-  @media (max-width: $desktop-min - 1) {
-    @content;
-  }
-}
-
-@mixin phablet-only {
-  @media (min-width: $phablet-min) and (max-width: $tablet-min - 1) {
-    @content;
-  }
-}
-
-@mixin tablet-only {
-  @media (min-width: $tablet-min) and (max-width: $desktop-min - 1) {
-    @content;
-  }
-}
-
-@mixin phablet-tablet-only {
-  @media (min-width: $phablet-min) and (max-width: $desktop-min - 1) {
-    @content;
-  }
-}
-
-@mixin desktop-only {
-  @media (min-width: $desktop-min) and (max-width: $large-desktop-min - 1) {
-    @content;
-  }
-}
-
-@mixin large-desktop-only {
-  @media (min-width: $large-desktop-min) and (max-width: $x-large-desktop-min - 1) {
     @content;
   }
 }

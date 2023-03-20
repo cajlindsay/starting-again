@@ -8,6 +8,11 @@ wsl --shutdown
 wsl
 ```
 
+or running this command:
+```
+sudo hwclock --hctosys
+```
+
 # Issues with wsl network connectivity
 
 The following commands can resolve alot of common problems:
@@ -27,4 +32,15 @@ You may also have to do this:
 
 ```
 rm -rf /var/snap/docker/179/run/docker.pid
+```
+
+# Playwright install deps fails in either wsl or docker
+You may see an error like this:
+```
+Release file for http://archive.ubuntu.com/ubuntu/dists/jammy-updates/InRelease is not valid yet
+```
+
+This can be caused by the wsl system time drifting from the time on the host machine. It can be fixed on each occassion with this command:
+```
+sudo hwclock --hctosys
 ```

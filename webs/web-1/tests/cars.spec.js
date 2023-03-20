@@ -41,11 +41,11 @@ test('add a new car', async ({ page }) => {
       const body = request.postDataJSON();
       expect(body).toStrictEqual({ make: 'Toyota', model: 'Corolla' });
       return route.fulfill({ status: 200 });
-    } 
+    }
     // mock the subsequent GET request
     else if (method === 'GET') {
       return route.fulfill({ json: [...mockCars, { make: 'Toyota', model: 'Corolla' }] });
-    } 
+    }
     // throw error if anything else
     else {
       throw new Error('unexpected request method');
