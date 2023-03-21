@@ -34,7 +34,7 @@
   color: colors.$neutral-white;
   background-color: colors.$primary;
   border-color: colors.$primary;
-  box-shadow: 0 0 24.4898px rgb(colors.$primary-alt01-400 0.3);
+  box-shadow: 0 0 24.4898px rgb(colors.$primary-alt01-400, 0.3);
 
   @include states.hover-and-active {
     background-color: colors.$primary-alt01;

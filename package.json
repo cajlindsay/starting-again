@@ -14,7 +14,7 @@
     "kill": "pm2 delete pm2.config.cjs",
     "monitor": "pm2 monit",
     "pw": "playwright",
-    "qq": "docker run -it -v $(pwd):/app -p 9323:9323 mcr.microsoft.com/playwright:v1.31.0-jammy /bin/bash"
+    "test-env": "docker run -it --ipc=host --user $(id -u) -v $(pwd):/app -p 9323:9323 mcr.microsoft.com/playwright:v1.31.0-jammy /bin/bash"
   },
   "dependencies": {
     "@azure/msal-browser": "2.33.0",

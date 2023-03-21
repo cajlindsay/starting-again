@@ -33,8 +33,9 @@ export default defineConfig({
         open: process.env.CI ? 'never' : 'on-failure',
         // drop report output to .playwright-report subfolder in project being tested
         outputFolder: path.join(process.cwd(), '.playwright-report'),
-        // set host to 0.0.0.0 so that it can serve the report outside of the docker container
-        host: '0.0.0.0'
+        // when running in docker set host to 0.0.0.0 so that it can serve the report outside of 
+        // the docker container, but make sure that it still serves on localhost when running locally
+        host: process.env.HOME === '/home/pwuser' ? '0.0.0.0' : 'localhost'
       }
     ]
   ],
