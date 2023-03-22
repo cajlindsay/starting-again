@@ -14,7 +14,7 @@ export default function Label({ className, label, required = false }: LabelProps
     label && (
       <div className={classNames(className, 'label')}>
         <span>{label}</span>
-        {required && <span>*</span>}
+        {required && <span className="required-indicator">*</span>}
       </div>
     )
   );

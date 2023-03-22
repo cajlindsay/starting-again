@@ -12,4 +12,8 @@
   margin: 0 sizing.$space-m;
   transition: 150ms linear color;
   user-select: none;
+
+  .required-indicator {
+    color: red;
+  }
 }

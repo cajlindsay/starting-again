@@ -37,14 +37,14 @@ export default function FormField({
       })}
     >
       <label>
-        {React.cloneElement(children, {
-          onBlur: () => setHasFocus(false),
-          onFocus: () => setHasFocus(true)
-        })}
         <Label
           label={label}
           required={required}
         />
+        {React.cloneElement(children, {
+          onBlur: () => setHasFocus(false),
+          onFocus: () => setHasFocus(true)
+        })}
       </label>
 
       {error && <p className="error-message">{error}</p>}

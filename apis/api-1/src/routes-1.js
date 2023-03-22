@@ -23,4 +23,9 @@ router.post('/cars', async (req, res) => {
   return res.json(insertedCar);
 });
 
+router.delete('/cars/:carId', async (req, res) => {
+  await CarTemplate.deleteOne({ _id: req.params.carId });
+  return res.sendStatus(200);
+});
+
 export default router;

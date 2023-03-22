@@ -65,9 +65,6 @@
 
   &.has-focus {
     > label {
-      display: flex;
-      flex-direction: column-reverse;
-
       > .label {
         color: colors.$tertiary-100;
       }
