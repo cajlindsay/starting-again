@@ -1,5 +1,5 @@
 import { Mongoose } from 'mongoose';
-import { carSchema } from './db-schema.js';
+import { carSchema, personSchema } from './db-schema.js';
 import connectionString from './mongo-connection-string.js';
 
 const db = new Mongoose();
@@ -14,3 +14,4 @@ db.connect(connectionString())
   });
 
 export const CarTemplate = db.model('Car', carSchema);
+export const PersonTemplate = db.model('Person', personSchema);

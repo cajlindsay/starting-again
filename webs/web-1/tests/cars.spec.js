@@ -8,7 +8,7 @@ const mockCars = [
 ];
 
 test('navigate to cars page', async ({ page }) => {
-  await page.route('./api-1/routes-1/cars', (route) => {
+  await page.route('./api-1/cars', (route) => {
     return route.fulfill({ json: mockCars });
   });
 
@@ -18,7 +18,7 @@ test('navigate to cars page', async ({ page }) => {
 
 test('add a new car', async ({ page }) => {
   // mock api call for page load
-  await page.route('./api-1/routes-1/cars', async (route) => {
+  await page.route('./api-1/cars', async (route) => {
     const method = route.request().method();
     expect(method).toBe('GET');
     return route.fulfill({ json: mockCars });
@@ -32,7 +32,7 @@ test('add a new car', async ({ page }) => {
   await page.fill('.model-input', 'Corolla');
 
   // re-mock api calls
-  await page.route('./api-1/routes-1/cars', async (route) => {
+  await page.route('./api-1/cars', async (route) => {
     const request = route.request();
     const method = request.method();
 

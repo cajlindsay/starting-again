@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import TextField from '@starting-again/web-styles/src/components/text-field/text-field';
@@ -15,10 +15,6 @@ const defaultForm = {
 export default function CarsList() {
   const cars = useSelector(selectCars);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCars());
-  }, [dispatch]);
 
   const [form, setForm] = useState(defaultForm);
 

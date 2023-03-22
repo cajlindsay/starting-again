@@ -5,7 +5,7 @@ import apiClient from '@starting-again/web-common/src/api-client.js';
 export const fetchCars = createAsyncThunk(
   'cars/fetch', // id
   async () => {
-    const response = await apiClient.get('/api-1/routes-1/cars');
+    const response = await apiClient.get('/api-1/cars');
     return response.data
   }
 );
@@ -13,7 +13,7 @@ export const fetchCars = createAsyncThunk(
 export const addCar = createAsyncThunk(
   'cars/add', // id
   async (payload) => {
-    const response =  await apiClient.post('/api-1/routes-1/cars', payload);
+    const response =  await apiClient.post('/api-1/cars', payload);
     return response.data;
   }
 );
@@ -21,7 +21,7 @@ export const addCar = createAsyncThunk(
 export const deleteCar = createAsyncThunk(
   'cars/delete', // id
   async (payload) => {
-    const response =  await apiClient.delete(`/api-1/routes-1/cars/${payload._id}`);
+    const response =  await apiClient.delete(`/api-1/cars/${payload._id}`);
     return response.data;
   }
 );
@@ -74,8 +74,3 @@ export const carsSlice = createSlice({
 
 // selectors
 export const selectCars = (state) => state.cars.items;
-
-// sagas
-export function* rootSaga() {
-  // noop
-}

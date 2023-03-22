@@ -10,3 +10,14 @@ export const carSchema = new Schema({
     required: true
   }
 });
+
+export const personSchema = new Schema({
+  givenName: {
+    type: String,
+    required: true
+  },
+  familyName: {
+    type: String,
+    required: true
+  }
+});
