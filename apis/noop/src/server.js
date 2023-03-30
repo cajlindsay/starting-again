@@ -1,13 +1,7 @@
-import express from 'express';
-
-const app = express();
-
-app.get('/', (req, res) => {
-  res.json({ api: 'noop' });
-});
+import { app } from './app.js';
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log('noop listening on port ' + PORT);
+  console.log(`server listening on port ${PORT}`);
 });

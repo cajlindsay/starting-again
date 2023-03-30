@@ -5,6 +5,7 @@ import { logOut } from '@starting-again/web-common/src/auth';
 import apiClient from '@starting-again/web-common/src/api-client.js';
 import CarsList from './cars';
 import PeopleList from './people';
+import DevicesList from './devices';
 
 import './app.scss';
 
@@ -18,6 +19,7 @@ export default function App() {
           <NavLink to="/route-2">Route 2</NavLink>
           <NavLink to="/cars">Cars</NavLink>
           <NavLink to="/people">People</NavLink>
+          <NavLink to="/devices">Devices</NavLink>
         </div>
         <Routes>
           <Route
@@ -35,6 +37,10 @@ export default function App() {
           <Route
             path="/people"
             element={<PeopleList />}
+          />
+          <Route
+            path="/devices"
+            element={<DevicesList />}
           />
           <Route
             path="*"

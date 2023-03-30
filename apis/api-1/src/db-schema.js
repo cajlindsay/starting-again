@@ -21,3 +21,14 @@ export const personSchema = new Schema({
     required: true
   }
 });
+
+export const deviceSchema = new Schema({
+  make: {
+    type: String,
+    required: true
+  },
+  model: {
+    type: String,
+    required: true
+  }
+});

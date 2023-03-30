@@ -2,7 +2,7 @@
   "name": "@starting-again/noop",
   "type": "module",
   "scripts": {
-    "test": "vitest --config ../../_config-vite/vite.non-web.config.js --coverage",
+    "test": "vitest --config ../../_config-vite/vite.node.config.js --coverage",
     "lint:style": "echo no styles here",
     "lint:code": "eslint \"**/*.{ts,tsx,js,jsx}\"",
     "prettier": "prettier --config ../../.prettierrc.yaml --ignore-path ../../.prettierignore --check .",

@@ -1,3 +1,7 @@
 #app {
   // empty ruleset
+  .nav > * {
+    display: inline-block;
+    margin-right: 10px;
+  }
 }

@@ -1,15 +1,17 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import baseQuery from './_base-query.js';
+import baseQuery from './_base-query.ts';
+
+const peopleTags = ['People'];
 
 // reducers
 export const peopleSlice = createApi({
   reducerPath: 'people',
-  tagTypes: ['People'],
+  tagTypes: peopleTags,
   baseQuery,
   endpoints: builder => ({
     getPeople: builder.query({
       query: () => '/api-1/people',
-      providesTags: ['People']
+      providesTags: peopleTags
     }),
     addPerson: builder.mutation({
       query: body => ({
@@ -17,14 +19,14 @@ export const peopleSlice = createApi({
         method: 'POST',
         body
       }),
-      invalidatesTags: ['People']
+      invalidatesTags: peopleTags
     }),
     deletePerson: builder.mutation({
       query: person => ({
         url: `/api-1/people/${person._id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: ['People']
+      invalidatesTags: peopleTags
     })
   })
 });
