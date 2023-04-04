@@ -15,8 +15,7 @@ export default defineConfig({
   // dev server config
   server: {
     // expose on PORT provided by pm2
-    port: process.env.PORT,
-    host: '0.0.0.0'
+    port: process.env.PORT
   },
 
   // testing config

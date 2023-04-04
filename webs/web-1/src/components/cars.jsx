@@ -50,12 +50,14 @@ export default function CarsList() {
           value={form.make}
           required
           onChange={(make) => setForm({ ...form, make })}
+          className="make-input"
         />
         <TextField 
           label="Model"
           value={form.model}
           required
           onChange={(model) => setForm({ ...form, model })}
+          className="model-input"
         />
         <input
           type="submit"

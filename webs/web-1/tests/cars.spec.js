@@ -16,6 +16,25 @@ test('navigate to cars page', async ({ page }) => {
   expect(await page.screenshot()).toMatchSnapshot();
 });
 
+test('accepts user input', async ({ page }) => {
+  // mock api call for page load
+  await page.route('./api-1/cars', async (route) => {
+    const method = route.request().method();
+    expect(method).toBe('GET');
+    return route.fulfill({ json: mockCars });
+  });
+
+  // navigate to the cars page
+  await page.goto('./cars');
+
+  // fill out the form fields
+  await page.fill('.make-input input', 'Toyota');
+  await page.fill('.model-input input', 'Corolla');
+
+  // assert
+  expect(await page.screenshot()).toMatchSnapshot();
+});
+
 test('add a new car', async ({ page }) => {
   // mock api call for page load
   await page.route('./api-1/cars', async (route) => {
@@ -28,8 +47,8 @@ test('add a new car', async ({ page }) => {
   await page.goto('./cars');
 
   // fill out the form fields
-  await page.fill('.make-input', 'Toyota');
-  await page.fill('.model-input', 'Corolla');
+  await page.fill('.make-input input', 'Toyota');
+  await page.fill('.model-input input', 'Corolla');
 
   // re-mock api calls
   await page.route('./api-1/cars', async (route) => {

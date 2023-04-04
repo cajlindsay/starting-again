@@ -40,7 +40,7 @@ export default defineConfig({
       (prev, next) => ({
         ...prev,
         [`/${next[0]}`]: {
-          target: `http://127.0.0.1:${next[1]}`,
+          target: `http://localhost:${next[1]}`,
           changeOrigin: true,
           secure: false,
           rewrite: (path) => path.replace(`/${next[0]}`, '')

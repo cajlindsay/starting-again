@@ -35,7 +35,8 @@ export default defineConfig({
         outputFolder: path.join(process.cwd(), '.playwright-report'),
         // when running in docker set host to 0.0.0.0 so that it can serve the report outside of 
         // the docker container, but make sure that it still serves on localhost when running locally
-        host: process.env.HOME === '/home/pwuser' ? '0.0.0.0' : 'localhost'
+        host: process.env.HOME === '/home/pwuser' ? '0.0.0.0' : 'localhost',
+        port: 9323
       }
     ]
   ],
