@@ -1,5 +1,5 @@
 import express from 'express';
-import { DeviceTemplate } from './db-model.js';
+import { DeviceTemplate } from '@starting-again/db/src/model.js';
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 import { Mongoose } from 'mongoose';
-import { carSchema, personSchema, deviceSchema } from './db-schema.js';
+import { carSchema, personSchema, deviceSchema } from './schema.js';
 import connectionString from './mongo-connection-string.js';
 
 const db = new Mongoose();

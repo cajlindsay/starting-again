@@ -8,9 +8,8 @@ services:
       - webnet
     ports:
       - 27017:27017
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=B49B817164814B2BBDCCC0C5674BFDB3
-      - MONGO_INITDB_ROOT_PASSWORD=DBD2ED7937D44982A483243E1C49995E95F147A3F0A94997A13288A9C6F7377DB4E1BFAAACB44F2285517816A8222B576
+    env_file:
+      - ../api-packages/db/_config-env/.env
 
   api-1:
     image: node:19.4.0-alpine
@@ -20,9 +19,10 @@ services:
     networks:
       - webnet
     env_file:
-      - api.env
+      - ../api-packages/db/_config-env/.env
+      - ../api-packages/api-common/_config-env/msal.env
     environment:
-      - NODE_ENV=development
+      - MONGO_SERVER=db
     working_dir: /app/apis/api-1
     command: npx vite --config ../../_config-vite/vite.node.config.js
 
@@ -34,9 +34,7 @@ services:
     networks:
       - webnet
     env_file:
-      - api.env
-    environment:
-      - NODE_ENV=development
+      - ../api-packages/api-common/_config-env/msal.env
     working_dir: /app/apis/api-2
     command: npx vite --config ../../_config-vite/vite.node.config.js
       
@@ -48,9 +46,7 @@ services:
     networks:
       - webnet
     env_file:
-      - api.env
-    environment:
-      - NODE_ENV=development
+      - ../api-packages/api-common/_config-env/msal.env
     working_dir: /app/apis/graphql-server
     command: npx vite --config ../../_config-vite/vite.node.config.js
 
@@ -65,9 +61,8 @@ services:
       - 5173:5173
     environment:
       - PORT=5173
-      - NODE_ENV=development
     working_dir: /app/webs/web-1
-    command: npx vite --config ../../_config-vite/vite.web.config.js
+    command: npx vite --config ../../_config-docker/vite.web.config.js
 
 networks:
   webnet:

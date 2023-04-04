@@ -9,13 +9,6 @@ export const app = express();
 app.use(authenticate);
 app.use(express.json());
 
-app.use((req, res, next) => {
-  console.log((new Date()).getMinutes(), ':', (new Date()).getSeconds())
-  console.log(req.path);
-  console.log(req.headers.authorization);
-  next();
-});
-
 app.get('/', (req, res) => {
   res.json({ api: 'api-1' }); //) req.authInfo.name });
 });

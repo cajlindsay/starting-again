@@ -1,4 +1,13 @@
+const dotenv = require('dotenv'); // eslint-disable-line
+const fs = require('fs'); // eslint-disable-line
+
 function apiConfig(app, port) {
+  const mongoConfigRaw = fs.readFileSync('./api-packages/db/_config-env/.env');
+  const mongoConfig = dotenv.parse(mongoConfigRaw);
+
+  const msalConfigRaw = fs.readFileSync('./api-packages/api-common/_config-env/msal.env');
+  const msalConfig = dotenv.parse(msalConfigRaw);
+
   return {
     name: app,
     script: 'vite --config ../../_config-vite/vite.node.config.js',
@@ -6,15 +15,8 @@ function apiConfig(app, port) {
     cwd: `apis/${app}`,
     env: {
       PORT: port,
-      MSAL_TENANT_URL: 'https://login.microsoftonline.com/consumers',
-      MSAL_CLIENT_ID: 'ef0f1a58-5d27-48f4-a47d-043df4ea4c3f',
-      MSAL_CLIENT_SECRET: 'HqN8Q~uAE.yQED1eb-2k_bnVXjCNwqojugqfFaSp',
-      MONGO_INITDB_ROOT_USERNAME: 'B49B817164814B2BBDCCC0C5674BFDB3',
-      MONGO_INITDB_ROOT_PASSWORD:
-        'DBD2ED7937D44982A483243E1C49995E95F147A3F0A94997A13288A9C6F7377DB4E1BFAAACB44F2285517816A8222B576',
-      MONGO_DATABASE: 'starting-again',
-      MONGO_SERVER: 'localhost',
-      MONGO_PORT: '27017'
+      ...msalConfig,
+      ...mongoConfig
     }
   };
 }

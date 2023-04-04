@@ -1,5 +1,5 @@
 import express from 'express';
-import { CarTemplate } from './db-model.js';
+import { CarTemplate } from '@starting-again/db/src/model.js';
 
 const router = express.Router();
 

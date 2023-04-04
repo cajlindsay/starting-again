@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { mockGetDevices, mockGetPeople } from './_utils.js';
 
 const mockCars = [
   { make: 'Foo', model: 'Bar' },
@@ -8,6 +9,9 @@ const mockCars = [
 ];
 
 test('navigate to cars page', async ({ page }) => {
+  await mockGetDevices(page);
+  await mockGetPeople(page);
+
   await page.route('./api-1/cars', (route) => {
     return route.fulfill({ json: mockCars });
   });
@@ -17,7 +21,10 @@ test('navigate to cars page', async ({ page }) => {
 });
 
 test('accepts user input', async ({ page }) => {
-  // mock api call for page load
+  await mockGetDevices(page);
+  await mockGetPeople(page);
+
+  // mock api call for cars
   await page.route('./api-1/cars', async (route) => {
     const method = route.request().method();
     expect(method).toBe('GET');
@@ -36,7 +43,10 @@ test('accepts user input', async ({ page }) => {
 });
 
 test('add a new car', async ({ page }) => {
-  // mock api call for page load
+  await mockGetDevices(page);
+  await mockGetPeople(page);
+
+  // mock api call for cars
   await page.route('./api-1/cars', async (route) => {
     const method = route.request().method();
     expect(method).toBe('GET');

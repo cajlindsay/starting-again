@@ -1,5 +1,5 @@
 import express from 'express';
-import { PersonTemplate } from './db-model.js';
+import { PersonTemplate } from '@starting-again/db/src/model.js';
 
 const router = express.Router();
 

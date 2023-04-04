@@ -31,8 +31,9 @@ export default defineConfig({
 
   // dev server config
   server: {
-    // expose on PORT provided by pm2 config file
+    // expose on PORT provided by pm2 config file or docker compose file
     port: process.env.PORT,
+    host: '0.0.0.0',
 
     // all api requests from a web app call the web app's own url, but then
     // proxy the requests to the apis
@@ -40,7 +41,7 @@ export default defineConfig({
       (prev, next) => ({
         ...prev,
         [`/${next[0]}`]: {
-          target: `http://localhost:${next[1]}`,
+          target: `http://${next[0]}:5173`,
           changeOrigin: true,
           secure: false,
           rewrite: (path) => path.replace(`/${next[0]}`, '')
