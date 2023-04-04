@@ -9,6 +9,7 @@ wsl
 ```
 
 or running this command:
+
 ```
 sudo hwclock --hctosys
 ```
@@ -35,12 +36,25 @@ rm -rf /var/snap/docker/179/run/docker.pid
 ```
 
 # Playwright install deps fails in either wsl or docker
+
 You may see an error like this:
+
 ```
 Release file for http://archive.ubuntu.com/ubuntu/dists/jammy-updates/InRelease is not valid yet
 ```
 
 This can be caused by the wsl system time drifting from the time on the host machine. It can be fixed on each occassion with this command:
+
 ```
 sudo hwclock --hctosys
 ```
+
+# vite proxy fails when starting a web app for the first time on local machine
+
+This is really an unsolved issue but can be worked around by calling one of the apis, via the proxy, using curl. e.g.
+
+```
+curl http://localhost:5172/api-1
+```
+
+Note that this is just a workaround until I find a more robust solution.

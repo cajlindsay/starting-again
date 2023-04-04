@@ -80,7 +80,7 @@ function* onFetchAll() {
     const response = yield call(apiClient.get, '/api-1/devices');
     yield put({ type: FETCH_ALL_SUCCEEDED, payload: response.data });
   } catch (error) {
-    yield put({ type: FETCH_ALL_FAILED, payload: error });
+    yield put({ type: FETCH_ALL_FAILED, payload: error.toString() });
   }
 }
 
@@ -89,7 +89,7 @@ function* onCreate(action) {
     yield call(apiClient.post, '/api-1/devices', action.payload);
     yield put({ type: CREATE_SUCCEEDED });
   } catch (error) {
-    yield put({ type: CREATE_FAILED, payload: error });
+    yield put({ type: CREATE_FAILED, payload: error.toString() });
   }
 }
 
@@ -98,7 +98,7 @@ function* onDelete(action) {
     yield call(apiClient.delete, `/api-1/devices/${action.payload._id}`);
     yield put({ type: DELETE_SUCCEEDED });
   } catch (error) {
-    yield put({ type: DELETE_FAILED, payload: error });
+    yield put({ type: DELETE_FAILED, payload: error.toString() });
   }
 }
 

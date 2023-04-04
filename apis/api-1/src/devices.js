@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const docs = await DeviceTemplate.find({});
-  return res.json(docs.concat(docs));
+  return res.json(docs);
 });
 
 router.post('/', async (req, res) => {

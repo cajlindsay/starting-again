@@ -32,7 +32,7 @@ api.interceptors.response.use(
     set401Count(0);
     return response;
   },
-  (error) => {
+  async (error) => {
     // reject non-401 errors
     if (error.response?.status !== 401) {
       set401Count(0);
@@ -48,7 +48,8 @@ api.interceptors.response.use(
 
     // increment 401 count and log out
     set401Count(count401 + 1);
-    logOut();
+    await logOut();
+    return Promise.reject(error);
   }
 );
 
