@@ -6,14 +6,14 @@ export const fetchCars = createAsyncThunk(
   'cars/fetch', // id
   async () => {
     const response = await apiClient.get('/api-1/cars');
-    return response.data
+    return response.data;
   }
 );
 
 export const addCar = createAsyncThunk(
   'cars/add', // id
   async (payload) => {
-    const response =  await apiClient.post('/api-1/cars', payload);
+    const response = await apiClient.post('/api-1/cars', payload);
     return response.data;
   }
 );
@@ -21,7 +21,7 @@ export const addCar = createAsyncThunk(
 export const deleteCar = createAsyncThunk(
   'cars/delete', // id
   async (payload) => {
-    const response =  await apiClient.delete(`/api-1/cars/${payload._id}`);
+    const response = await apiClient.delete(`/api-1/cars/${payload._id}`);
     return response.data;
   }
 );

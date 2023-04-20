@@ -26,7 +26,7 @@ export default function CarsList() {
     return () => {
       //unmount
     };
-  }, [setCars]);
+  }, []);
 
   const fetchCars = useCallback(
     async function () {
@@ -40,9 +40,7 @@ export default function CarsList() {
   const onSubmit = useCallback(
     async function () {
       const query = `mutation createCar($make: String!, $model: String!) {
-        createCar(input: { make: $make, model: $model }) {
-          id make model
-        }
+        createCar(input: { make: $make, model: $model }) { make model id }
       }`;
 
       await gqlQuery(query, form);
@@ -85,6 +83,7 @@ export default function CarsList() {
         <input
           type="submit"
           value="Submit"
+          className="btn-primary-medium"
         />
       </form>
       <table className="primary-table">

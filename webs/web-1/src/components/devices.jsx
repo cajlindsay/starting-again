@@ -28,7 +28,7 @@ export default function DevicesList() {
 
   const onDeleteClick = useCallback(
     function (item) {
-      dispatch({ type: DELETE, payload: item })
+      dispatch({ type: DELETE, payload: item });
     },
     [dispatch]
   );
@@ -43,13 +43,13 @@ export default function DevicesList() {
         noValidate
         autoComplete="off"
       >
-        <TextField 
+        <TextField
           label="Make"
           value={form.make}
           required
           onChange={(make) => setForm({ ...form, make })}
         />
-        <TextField 
+        <TextField
           label="Model"
           value={form.model}
           required

@@ -1,27 +1,26 @@
-  type Car {
-    id: String!,
-    make: String!,
-    model: String!
-  }
+type Car {
+  id: String!
+  make: String!
+  model: String!
+}
 
-  input CarInput {
-    make: String!,
-    model: String!
-  }
+input CarInput {
+  make: String!
+  model: String!
+}
 
-  type DeleteResult {
-    n: Int,
-    ok: Int,
-    deletedCount: Int
-  }
-  
-  type Query {
-    hello: String,
-    cars: [Car]!,
-    rollDice(numDice: Int!, numSides: Int): [Int]
-  }
+type DeleteResult {
+  n: Int
+  ok: Int
+  deletedCount: Int
+}
 
-  type Mutation {
-    createCar(input: CarInput): Car
-    deleteCar(carId: String!): DeleteResult
-  }
+type Query {
+  cars: [Car]!
+  rollDice(numDice: Int!, numSides: Int): [Int]
+}
+
+type Mutation {
+  createCar(input: CarInput): Car
+  deleteCar(carId: String!): DeleteResult
+}

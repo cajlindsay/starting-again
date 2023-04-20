@@ -6,7 +6,7 @@ const db = new Mongoose();
 
 export const CarTemplate = db.model('Car', carSchema);
 export const PersonTemplate = db.model('Person', personSchema);
-export const DeviceTemplate = db.model('Device', deviceSchema );
+export const DeviceTemplate = db.model('Device', deviceSchema);
 
 db.connect(connectionString())
   .then(() => {

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from '@redux-saga/core'
+import createSagaMiddleware from '@redux-saga/core';
 
 import { carsSlice, fetchCars } from './cars';
 import { peopleSlice } from './people';
@@ -16,9 +16,7 @@ export const store = configureStore({
     devices,
     [peopleSlice.reducerPath]: peopleSlice.reducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-    .concat(peopleSlice.middleware)
-    .concat(sagaMiddleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(peopleSlice.middleware).concat(sagaMiddleware)
 });
 
 store.dispatch(fetchCars());

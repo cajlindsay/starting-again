@@ -1,4 +1,4 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './_base-query.ts';
 
 const peopleTags = ['People'];
@@ -8,13 +8,13 @@ export const peopleSlice = createApi({
   reducerPath: 'people',
   tagTypes: peopleTags,
   baseQuery,
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getPeople: builder.query({
       query: () => '/api-1/people',
       providesTags: peopleTags
     }),
     addPerson: builder.mutation({
-      query: body => ({
+      query: (body) => ({
         url: '/api-1/people',
         method: 'POST',
         body
@@ -22,7 +22,7 @@ export const peopleSlice = createApi({
       invalidatesTags: peopleTags
     }),
     deletePerson: builder.mutation({
-      query: person => ({
+      query: (person) => ({
         url: `/api-1/people/${person._id}`,
         method: 'DELETE'
       }),
@@ -32,8 +32,4 @@ export const peopleSlice = createApi({
 });
 
 // hooks
-export const { 
-  useGetPeopleQuery,
-  useAddPersonMutation,
-  useDeletePersonMutation 
-} = peopleSlice;
+export const { useGetPeopleQuery, useAddPersonMutation, useDeletePersonMutation } = peopleSlice;

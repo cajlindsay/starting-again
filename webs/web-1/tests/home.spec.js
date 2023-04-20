@@ -15,7 +15,7 @@ test('click api 1', async ({ page }) => {
   await mockGetDevices(page);
   await mockGetPeople(page);
   await mockGetCars(page);
-  
+
   await page.route('./api-1', async (route) => {
     const json = {
       message: 'this is the mock result from calling api-1'
@@ -32,7 +32,7 @@ test('click api 2', async ({ page }) => {
   await mockGetDevices(page);
   await mockGetPeople(page);
   await mockGetCars(page);
-  
+
   await page.route('./api-2', async (route) => {
     const json = {
       message: 'this is the mock result from calling api-2'

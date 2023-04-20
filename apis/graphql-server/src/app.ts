@@ -18,23 +18,10 @@ const schemaString = fs.readFileSync(schemaPath, 'utf-8');
 const schema = buildSchema(schemaString);
 
 // The root provides a resolver function for each API endpoint
-const root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-  cars: async () => {
-    const docs = await CarTemplate.find({});
-    return docs;
-  },
-  createCar: async ({ input }) => {
-    const car = new CarTemplate(input);
-    const insertedCar = await car.save();
-    return insertedCar;
-  },
-  deleteCar: async({ carId }) => {
-    const result = await CarTemplate.deleteOne({ _id: carId });
-    return result;
-  },
+const rootValue = {
+  cars: () => CarTemplate.find({}),
+  createCar: ({ input }) => new CarTemplate(input).save(),
+  deleteCar: ({ carId }) => CarTemplate.deleteOne({ _id: carId }),
   rollDice: ({ numDice, numSides }) => {
     const output = [];
     for (let i = 0; i < numDice; i++) {
@@ -48,8 +35,8 @@ const root = {
 app.use(
   '/',
   graphqlHTTP({
-    schema: schema,
-    rootValue: root,
+    schema,
+    rootValue,
     graphiql: true
   })
 );
