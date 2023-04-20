@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import FormField from '../form-field/form-field';
+import FormField from '../form-field/form-field.tsx';
 
 interface TextFieldProps {
   className?: string;

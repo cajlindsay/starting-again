@@ -2,6 +2,11 @@
   "compilerOptions": {
     "isolatedModules": true,
     "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "jsx": "react"
+    // rest options remain same
   }
 }

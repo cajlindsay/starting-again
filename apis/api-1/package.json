@@ -2,6 +2,7 @@
   "name": "@starting-again/api-1",
   "type": "module",
   "scripts": {
+    "start": "vite --config=../../_config-vite/vite.node.config.js",
     "build": "",
     "test": "vitest --config ../../_config-vite/vite.node.config.js --coverage",
     "lint:style": "echo no styles here",

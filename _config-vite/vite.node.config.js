@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     ...VitePluginNode({
       adapter: 'express',
-      appPath: path.join(process.cwd(), 'src/app.js'),
+      appPath: path.join(process.cwd(), 'src/app.ts'),
       exportName: 'app'
     })
   ],

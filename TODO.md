@@ -23,7 +23,7 @@ web
 - DONE get react app working
 - DONE call apis
 - DONE scss and linting
-- redux
+- DONE redux
 - IN PROGRESS graphql
 - DONE typescript
 - vue
