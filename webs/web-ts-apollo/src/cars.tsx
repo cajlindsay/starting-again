@@ -1,12 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import axios from 'axios';
 import { useQuery, gql, useMutation } from '@apollo/client';
 
 import TextField from '@starting-again/web-styles/src/components/text-field/text-field.tsx';
 
 import './cars.scss';
-
-const { VITE_API_URL } = window.env;
 
 type Form = {
   make: string;
@@ -60,24 +57,18 @@ export default function CarsList() {
   });
 
   const onSubmit = useCallback(
-    async function () {
+    async function (e) {
+      e.preventDefault();
       await createCar({ variables: form });
       setForm(defaultForm);
     },
     [form, setForm]
   );
 
-  const onDeleteClick = useCallback(function (car) {
-    deleteCar({ variables: { carId: car.id } });
-  }, []);
-
   return (
     <div id="cars-list">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
+        onSubmit={onSubmit}
         noValidate
         autoComplete="off"
       >
@@ -121,7 +112,7 @@ export default function CarsList() {
                 <td>
                   <button
                     type="button"
-                    onClick={() => onDeleteClick(car)}
+                    onClick={() => deleteCar({ variables: { carId: car.id } })}
                   >
                     Delete
                   </button>
@@ -133,8 +124,4 @@ export default function CarsList() {
       </table>
     </div>
   );
-}
-
-function gqlQuery(query, variables?) {
-  return axios.post(`${VITE_API_URL}/apollo-server`, { query, variables });
 }
