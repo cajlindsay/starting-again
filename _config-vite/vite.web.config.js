@@ -6,7 +6,8 @@ import legacy from '@vitejs/plugin-legacy';
 const apis = [
   ['api-1', 3000],
   ['api-2', 3001],
-  ['graphql-server', 3002]
+  ['graphql-server', 3002],
+  ['apollo-server', 3003]
 ];
 
 export default defineConfig({

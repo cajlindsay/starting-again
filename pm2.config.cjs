@@ -38,8 +38,10 @@ module.exports = {
     apiConfig('api-1', 3000),
     apiConfig('api-2', 3001),
     apiConfig('graphql-server', 3002),
+    apiConfig('apollo-server', 3003),
     webConfig('web-1', 5173),
     webConfig('web-2', 5174),
-    webConfig('web-ts-graphql', 5175)
+    webConfig('web-ts-graphql', 5175),
+    webConfig('web-ts-apollo', 5176)
   ]
 };

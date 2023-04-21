@@ -1,5 +1,5 @@
 {
-  "name": "@starting-again/graphql-server",
+  "name": "@starting-again/apollo-server",
   "type": "module",
   "scripts": {
     "test": "vitest --config ../../_config-vite/vite.node.config.js --coverage",
@@ -7,13 +7,5 @@
     "lint:code": "eslint \"**/*.{ts,tsx,js,jsx}\"",
     "prettier": "prettier --config ../../.prettierrc.yaml --ignore-path ../../.prettierignore --check .",
     "prettier:fix": "npm run prettier -- --write"
-  },
-  "dependencies": {
-    "express-graphql": "0.12.0",
-    "graphql": "15.3.0"
-  },
-  "overrides": {
-    "express-graphql": "0.12.0",
-    "graphql": "15.3.0"
   }
 }
